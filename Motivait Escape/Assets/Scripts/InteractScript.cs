@@ -28,12 +28,10 @@ public class InteractScript : MonoBehaviour
                 if (hit.transform.gameObject.tag == "Interactable")
                 {
                     var ObjectScript = hit.transform.gameObject.GetComponent<InteractionObject>();
-              //      Debug.Log(ObjectScript.Name);
                     UIText.text = "This item is: " + ObjectScript.Name;
-                   
                 }
             }
-            Debug.DrawRay(cam.position, cam.forward * 10, Color.red);
+         //   Debug.DrawRay(cam.position, cam.forward * 10, Color.red);
         }
        
     }
@@ -45,13 +43,17 @@ public class InteractScript : MonoBehaviour
             var PlayerMeshFilter = player.GetComponentInChildren<MeshFilter>();
             var PlayerMeshRenderer = player.GetComponentInChildren<MeshRenderer>();
 
-
-
             PlayerMeshFilter.sharedMesh = this.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
             PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
             
-
             ObjectSet = true;
         }
     }
+
+    public void RemoveInteractionObject(GameObject value)
+    {
+        value.GetComponent<MeshRenderer>().material = null;
+        value.GetComponent<MeshFilter>().mesh = null;
+    }
+
 }

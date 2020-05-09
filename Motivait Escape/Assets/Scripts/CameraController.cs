@@ -11,17 +11,22 @@ public class CameraController : MonoBehaviour
     private Vector2 smoothVelocity;
     private Vector2 currentRotation;
 
-    // Start is called before the first frame update
+    CharacterMovement controlScript;
+
     void Start()
     {
         player = transform.parent.gameObject;
-        
-    }
+        controlScript = transform.parent.gameObject.GetComponent<CharacterMovement>();
+    } 
 
     // Update is called once per frame
     void Update()
     {
-        RotateCamera();   
+        if (!controlScript.GetIsInspecting())
+        {
+            RotateCamera();
+        }
+      
     }
 
     private void RotateCamera()

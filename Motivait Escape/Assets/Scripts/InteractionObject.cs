@@ -26,17 +26,15 @@ public class InteractionObject : MonoBehaviour
 
    public void SetInteractionObject(GameObject player)
     {
-        if (!ObjectSet)
-        {
+   //     if (!ObjectSet)
+    //    {
             var PlayerMeshFilter = player.GetComponentInChildren<MeshFilter>();
             var PlayerMeshRenderer = player.GetComponentInChildren<MeshRenderer>();
 
             PlayerMeshFilter.sharedMesh = this.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
             PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-
-
-            ObjectSet = true;
-        }
+  //         ObjectSet = true;
+   //     }
     }
    
 }
