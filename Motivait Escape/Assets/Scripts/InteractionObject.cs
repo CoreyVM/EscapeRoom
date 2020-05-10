@@ -12,16 +12,17 @@ public class InteractionObject : MonoBehaviour
     public ObjectType Type;
     public Mesh ObjectMesh;
 
+    private Vector3 Scale, Rotation;
     private bool ObjectSet;
+
+    public Vector3 GetScale() { return Scale; }
+    public Vector3 GetRotation() { return Rotation; }
 
     private void Start()
     {
         ObjectSet = false;
-    }
-
-   private void Update()
-    {
-        
+        Scale = transform.localScale;
+        Rotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
     }
 
    public void SetInteractionObject(GameObject player)
@@ -31,7 +32,7 @@ public class InteractionObject : MonoBehaviour
         
        PlayerMeshFilter.sharedMesh = this.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
        PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-
     }
+
    
 }

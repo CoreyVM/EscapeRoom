@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 10f;
     private Rigidbody rigid;
     private GameObject hitObject;
     private static bool isInspecting;
@@ -42,6 +42,8 @@ public class CharacterMovement : MonoBehaviour
             var script = transform.gameObject.GetComponent<InteractScript>();
             script.RemoveInteractionObject(InspectingObject);
             isInspecting = false;
+            InspectingObject.GetComponent<InspectorController>().ResetRotation();
+          
         }
 
     }
