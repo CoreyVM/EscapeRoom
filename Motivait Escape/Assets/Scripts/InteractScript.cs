@@ -9,12 +9,11 @@ public class InteractScript : MonoBehaviour
 {
     private GameObject player;
     private Text UIText;
-    private bool ObjectSet;
+    private bool TextSet;
     void Start()
     {
         player = transform.gameObject;
         UIText = transform.GetComponentInChildren<Text>();
-        ObjectSet = false;
     }
 
     private void Update()
@@ -28,27 +27,31 @@ public class InteractScript : MonoBehaviour
                 if (hit.transform.gameObject.tag == "Interactable")
                 {
                     var ObjectScript = hit.transform.gameObject.GetComponent<InteractionObject>();
-                    UIText.text = "This item is: " + ObjectScript.Name;
+                    if (!TextSet)
+                    {
+                        UIText.text = "This item is: " + ObjectScript.Name;
+                        TextSet = true;
+                    }
+                }
+                else
+                {
+                    UIText.text = "";
+                    TextSet = false;
                 }
             }
-         //   Debug.DrawRay(cam.position, cam.forward * 10, Color.red);
         }
        
     }
 
     void SetInteractionObject(GameObject player)
     {
-        if (!ObjectSet)
-        {
-            var PlayerMeshFilter = player.GetComponentInChildren<MeshFilter>();
-            var PlayerMeshRenderer = player.GetComponentInChildren<MeshRenderer>();
+        var PlayerMeshFilter = player.GetComponentInChildren<MeshFilter>();
+        var PlayerMeshRenderer = player.GetComponentInChildren<MeshRenderer>();
 
-            PlayerMeshFilter.sharedMesh = this.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
-            PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-            
-            ObjectSet = true;
-        }
-    }
+        PlayerMeshFilter.sharedMesh = this.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
+        PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
+        TextSet = false;
+    }     
 
     public void RemoveInteractionObject(GameObject value)
     {

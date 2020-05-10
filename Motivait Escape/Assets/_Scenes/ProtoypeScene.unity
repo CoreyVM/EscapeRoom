@@ -245,9 +245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074ff280f78b41e4c87665447e800304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Type: 0
-  ObjectMesh: {fileID: 0}
+  Name: Big Ass Book
+  ItemDescription: This book has some information i guess
+  Type: 2
+  ObjectMesh: {fileID: -66333826979096818, guid: 2b9b2bc30a55ef146aa55355d23eb565,
+    type: 3}
+  canRead: 1
 --- !u!135 &218442802
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -316,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218442800}
   m_LocalRotation: {x: 0.028026808, y: -0.13828465, z: 0.24879946, w: 0.9582227}
-  m_LocalPosition: {x: -34.492, y: 2.891, z: 110.949}
+  m_LocalPosition: {x: -35.669, y: 2.229, z: 110.949}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -382,7 +385,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 30
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 1
@@ -480,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   InspectingObject: {fileID: 2112558575}
+  UIText: {fileID: 269146758}
 --- !u!114 &332588509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,8 +787,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Big Daddy Sphere
+  ItemDescription: 
   Type: 2
   ObjectMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  canRead: 0
 --- !u!135 &757038635
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1090,8 +1096,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Boxxy
+  ItemDescription: 
   Type: 2
   ObjectMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  canRead: 0
 --- !u!65 &1417165556
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1518,6 +1526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189070e1ac385ed47b81b107a362f7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemDescription: 
+  UIText: {fileID: 269146758}
 --- !u!23 &2112558578
 MeshRenderer:
   m_ObjectHideFlags: 0

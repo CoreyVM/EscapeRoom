@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
     public GameObject InspectingObject;
     public void SetIsInspecting(bool value) { isInspecting = value; }
     public bool GetIsInspecting() { return isInspecting; }
-    
+    public Text UIText;
     
     void Start()
     {
@@ -30,19 +31,23 @@ public class CharacterMovement : MonoBehaviour
                 if (hit.transform.gameObject.tag == "Interactable" && !isInspecting)
                 {
                     var script = hit.transform.gameObject.GetComponent<InteractionObject>();
+                    var inspecController = InspectingObject.GetComponent<InspectorController>();
+                    inspecController.SetCanRead(script.canRead);
+                    inspecController.SetObjectScript(script);
                     script.SetInteractionObject(InspectingObject);
                     hitObject = hit.transform.gameObject;
                     isInspecting = true;
-                    Debug.Log("The mesh has been copied");
+                    UIText.text = "";
                 }
             }
+          
         }
         else if (Input.GetKeyDown(KeyCode.F) && isInspecting)
         {
             var script = transform.gameObject.GetComponent<InteractScript>();
             script.RemoveInteractionObject(InspectingObject);
             isInspecting = false;
-            InspectingObject.GetComponent<InspectorController>().ResetRotation();
+            InspectingObject.GetComponent<InspectorController>().ResetValues();
           
         }
 

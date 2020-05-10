@@ -26,7 +26,6 @@ public class CameraController : MonoBehaviour
         {
             RotateCamera();
         }
-      
     }
 
     private void RotateCamera()

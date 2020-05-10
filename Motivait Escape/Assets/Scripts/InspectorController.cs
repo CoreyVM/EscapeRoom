@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InspectorController : MonoBehaviour
 {
@@ -11,14 +12,24 @@ public class InspectorController : MonoBehaviour
     private CharacterMovement playerScript;
     private float rotationSpeed = 150;
 
+    private bool canRead, TextSet;
+    public string ItemDescription;
+
+    public void SetCanRead(bool value) { canRead = value; }
+    private InteractionObject objectScript;
+
+    public void SetObjectScript(InteractionObject script) { objectScript = script; }
+
+    public Text UIText;
 
     // Start is called before the first frame update
     void Start()
     {
+        TextSet = false;
         parent = transform.parent.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.transform.gameObject.GetComponent<CharacterMovement>();
-       
+        canRead = false;
     }
     void Update()
     {
@@ -26,9 +37,11 @@ public class InspectorController : MonoBehaviour
         {
             ZoomObject();
             RotateObject();
+        }
 
-            Debug.Log(parent.transform.localPosition.z);
-
+        if (Input.GetKeyDown(KeyCode.Space) && canRead)
+        {
+            SetUIText();
         }
     }
 
@@ -51,10 +64,25 @@ public class InspectorController : MonoBehaviour
         this.transform.Rotate(yRot, xRot, 0,Space.Self);
     }
 
-    public void ResetRotation()
+    public void ResetValues()
     {
         this.transform.localRotation = UnityEngine.Quaternion.Euler(0, 0, 0);
         parent.transform.localPosition = new UnityEngine.Vector3(0, 0, 1.26f);
-     // Add in the reset to z position in world scale for the parent objects
+        TextSet = false;
+        UIText.text = "";
+        //Add in a line to erase the current text in the UI
+    }
+
+    private void SetUIText() 
+    {
+        TextSet = !TextSet; //Creates a bool toggle so the text can be closed
+        if (TextSet)
+        {
+            UIText.text = objectScript.ItemDescription;
+        }
+        else
+        {
+            UIText.text = "";
+        }
     }
 }
