@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -25,14 +26,21 @@ public class InspectorController : MonoBehaviour
         {
             ZoomObject();
             RotateObject();
+
+            Debug.Log(parent.transform.localPosition.z);
+
         }
     }
 
     private void ZoomObject()
     {
-        float zPos = Input.GetAxis("Mouse ScrollWheel") * rotationSpeed * Time.deltaTime;
-        parent.transform.Translate(UnityEngine.Vector3.forward * zPos);
-     
+       float zPos = Input.GetAxis("Mouse ScrollWheel") * rotationSpeed * Time.deltaTime;
+       parent.transform.Translate(UnityEngine.Vector3.forward * zPos);
+
+        UnityEngine.Vector3 clampedPos = parent.transform.localPosition;
+        clampedPos.z = Mathf.Clamp(clampedPos.z, 1, 3);
+        parent.transform.localPosition = clampedPos;
+        
     }
 
     private void RotateObject()
@@ -46,5 +54,7 @@ public class InspectorController : MonoBehaviour
     public void ResetRotation()
     {
         this.transform.localRotation = UnityEngine.Quaternion.Euler(0, 0, 0);
+        parent.transform.localPosition = new UnityEngine.Vector3(0, 0, 1.26f);
+     // Add in the reset to z position in world scale for the parent objects
     }
 }
