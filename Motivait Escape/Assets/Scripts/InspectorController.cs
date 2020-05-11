@@ -70,7 +70,6 @@ public class InspectorController : MonoBehaviour
         parent.transform.localPosition = new UnityEngine.Vector3(0, 0, 1.26f);
         TextSet = false;
         UIText.text = "";
-        //Add in a line to erase the current text in the UI
     }
 
     private void SetUIText() 

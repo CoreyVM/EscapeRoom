@@ -69,7 +69,6 @@ public class CharacterMovement : MonoBehaviour
         Vector3 movement = new Vector3(hAxis, 0, yAxis) * moveSpeed;
 
         Vector3 newPosition = rigid.position + rigid.transform.TransformDirection(movement) * Time.deltaTime;
-        rigid.MovePosition(newPosition);
-       
+        rigid.MovePosition(newPosition);  
     }
 }
