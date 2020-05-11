@@ -12,7 +12,9 @@ public class CharacterMovement : MonoBehaviour
     public GameObject InspectingObject;
 
     private static bool isInspecting; //Member Variables
-    private List<string> KeysFound; 
+    private List<string> KeysFound = new List<string>(); 
+
+   public List<string> GetKeysFound() { return KeysFound; }
 
     public void SetIsInspecting() { isInspecting = !isInspecting; }
     public bool GetIsInspecting() { return isInspecting; }
@@ -22,8 +24,6 @@ public class CharacterMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         KeysFound.Clear();
     }
-
-
     void Update()
     {
         InteractWithObject();
@@ -72,6 +72,25 @@ public class CharacterMovement : MonoBehaviour
             isInspecting = false;
             InspectingObject.GetComponent<InspectorController>().ResetValues();
         }
+    }
+
+    public void AddKey(string Name)
+    {
+        KeysFound.Add(Name);
+        Debug.Log(KeysFound[0]);
+    }
+
+    public void RemoveKey(string Name)
+    {
+        KeysFound.Remove(Name);
+    }
+
+    public bool CheckForKey(string Name)
+    {
+        if (KeysFound.Contains(Name))
+            return true;
+        else
+            return false;
     }
 
 }

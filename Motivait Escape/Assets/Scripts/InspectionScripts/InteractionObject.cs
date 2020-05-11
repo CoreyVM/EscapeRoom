@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 public enum ObjectType {
-    None, Puzzle,
+    None, Puzzle, Door,
     Inspectable, Key, PC };
 
 public class InteractionObject : MonoBehaviour
@@ -54,10 +54,16 @@ public class InteractionObject : MonoBehaviour
                 InspectObject(controller);
                 break;
             case ObjectType.Key:
+                controller.AddKey(ItemName);
+                Destroy(this.gameObject);
                 break;
             case ObjectType.PC:
                 break;
             case ObjectType.Puzzle:
+                break;
+            case ObjectType.Door:
+                if (controller.GetKeysFound().Capacity > 0)
+                    this.transform.gameObject.GetComponent<DoorInteraction>().UnlockDoor(controller);
                 break;
         }
     }
