@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngineInternal;
 
-public class InteractScript : MonoBehaviour
+public class ScanForInteraction : MonoBehaviour
 {
     private GameObject player, hitObject;
     private Text UIText;
@@ -23,16 +23,17 @@ public class InteractScript : MonoBehaviour
         {
             RaycastHit hit;
             var cam = Camera.main.transform;
-            if (Physics.Raycast(cam.position,cam.forward, out hit, 10))
+            if (Physics.Raycast(cam.position,cam.forward, out hit, 10)) //Checks for an interaction item for description/highlighting
             {
                 if (hit.transform.gameObject.tag == "Interactable")
                 {
                     hitObject = hit.transform.gameObject;
                     var ObjectScript = hit.transform.gameObject.GetComponent<InteractionObject>();
                     hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 1.1f);
+                    
                     if (!TextSet)
                     {
-                        UIText.text = "This item is: " + ObjectScript.Name;
+                        UIText.text = "This item is: " + ObjectScript.ItemName;
                         TextSet = true;
                     }
                 }
@@ -44,13 +45,12 @@ public class InteractScript : MonoBehaviour
                     {
                         hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0);
                         hitObject = null;
-                        Debug.Log("Set the width to nothing");
+                        
                     }
                 }
              
             }
-        }
-       
+        }  
     }
 
     void SetInteractionObject(GameObject player)
@@ -63,10 +63,6 @@ public class InteractScript : MonoBehaviour
         TextSet = false;
     }     
 
-    public void RemoveInteractionObject(GameObject value)
-    {
-        value.GetComponent<MeshRenderer>().material = null;
-        value.GetComponent<MeshFilter>().mesh = null;
-    }
+
 
 }
