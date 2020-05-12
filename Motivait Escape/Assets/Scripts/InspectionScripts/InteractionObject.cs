@@ -9,7 +9,7 @@ public enum ObjectType {
 
 public class InteractionObject : MonoBehaviour
 {
-    public string ItemName, ItemDescription;
+    public string ItemName, ItemDescription, PuzzleType;
     public ObjectType ItemType;
     public Mesh ObjectMesh;
     private Renderer renderer;
@@ -60,6 +60,26 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.PC:
                 break;
             case ObjectType.Puzzle:
+                switch (PuzzleType)
+                {
+                    case "Internet Puzzle":
+                        var Board = GameObject.FindGameObjectWithTag("WireBoard");
+                        var BoardScript = Board.GetComponent<PuzzleBoard>();
+                        if (!controller.GetIsInspecting())
+                        {
+                            controller.SetIsInspecting();
+                            Debug.Log(controller.GetIsInspecting());
+                            controller.SetCameraEnabled(false);
+                            BoardScript.SetCameraEnabled(true);
+                            BoardScript.SetPlayerScript(controller);
+                            break;
+                        }
+                        else
+                            break;
+                       
+                    case "Keypad Puzzle":
+                        break;
+                }
                 break;
             case ObjectType.Door:
                 if (controller.GetKeysFound().Capacity > 0)

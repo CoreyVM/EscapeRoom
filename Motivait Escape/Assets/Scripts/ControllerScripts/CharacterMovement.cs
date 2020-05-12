@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     public float moveSpeed = 10f; //Components
     private Rigidbody rigid;
     private GameObject hitObject;
+    private Camera PlayerCamera;
     public Text UIText;
     public GameObject InspectingObject;
 
@@ -16,12 +17,16 @@ public class CharacterMovement : MonoBehaviour
 
    public List<string> GetKeysFound() { return KeysFound; }
 
+
     public void SetIsInspecting() { isInspecting = !isInspecting; }
     public bool GetIsInspecting() { return isInspecting; }
-  
+
+    public void SetCameraEnabled(bool value) { PlayerCamera.enabled = value; }
+
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        PlayerCamera = GetComponentInChildren<Camera>();
         KeysFound.Clear();
     }
     void Update()
@@ -50,7 +55,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void InteractWithObject()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !isInspecting) //Interacts with the object 
+        if (Input.GetKeyDown(KeyCode.F) && !isInspecting && PlayerCamera.enabled == true) //Interacts with the object 
         {
             RaycastHit hit;
             var cam = Camera.main.transform;

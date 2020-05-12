@@ -11,15 +11,17 @@ public class ScanForInteraction : MonoBehaviour
     private GameObject player, hitObject;
     private Text UIText;
     private bool TextSet;
+    private Camera PlayerCamera;
     void Start()
     {
         player = transform.gameObject;
         UIText = transform.GetComponentInChildren<Text>();
+        PlayerCamera = GetComponentInChildren<Camera>();
     }
 
     private void Update()
     {
-        if (player != null)
+        if (player != null && PlayerCamera.enabled == true)
         {
             RaycastHit hit;
             var cam = Camera.main.transform;
