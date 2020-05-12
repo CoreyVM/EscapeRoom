@@ -14,7 +14,6 @@ public class PuzzleBoard : MonoBehaviour
 
     void Start()
     {
-    //    puzzleCam = GetComponentInChildren<Camera>();
         puzzleCam.enabled = false;
         var pieces = GameObject.FindGameObjectsWithTag("WirePiece");
         foreach (GameObject obj in pieces)
@@ -41,9 +40,6 @@ public class PuzzleBoard : MonoBehaviour
                     playerScript.SetIsInspecting();
                     playerScript.SetCameraEnabled(true);
                     SetCameraEnabled(false);
-                  
-                    Debug.Log("Revert the camera");
-
                 }
             }
         }
@@ -53,9 +49,14 @@ public class PuzzleBoard : MonoBehaviour
     {
         transform.GetComponent<BoxCollider>().enabled = value;
         puzzleCam.enabled = value;
+
+        if (value == true)
+            Cursor.visible = true;
+        else 
+            Cursor.visible = false;
+        
         foreach (GameObject obj in boardPieces)
-        {
             obj.SetActive(value);
-        }
+        
     }
 }

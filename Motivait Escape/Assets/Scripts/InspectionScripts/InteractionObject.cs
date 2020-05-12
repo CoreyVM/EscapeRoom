@@ -68,15 +68,12 @@ public class InteractionObject : MonoBehaviour
                         if (!controller.GetIsInspecting())
                         {
                             controller.SetIsInspecting();
-                            Debug.Log(controller.GetIsInspecting());
                             controller.SetCameraEnabled(false);
                             BoardScript.SetCameraEnabled(true);
                             BoardScript.SetPlayerScript(controller);
                             break;
                         }
-                        else
-                            break;
-                       
+                        break;
                     case "Keypad Puzzle":
                         break;
                 }

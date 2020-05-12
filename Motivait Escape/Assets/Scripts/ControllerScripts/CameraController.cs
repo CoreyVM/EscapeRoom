@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
         player = transform.parent.gameObject;
         controlScript = transform.parent.gameObject.GetComponent<CharacterMovement>();
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
     } 
 
     // Update is called once per frame
