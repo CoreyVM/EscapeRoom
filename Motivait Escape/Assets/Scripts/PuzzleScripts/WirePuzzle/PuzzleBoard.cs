@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class PuzzleBoard : MonoBehaviour
@@ -8,9 +9,17 @@ public class PuzzleBoard : MonoBehaviour
     private GameObject StartingBlock, EndingBlock;
     public Camera puzzleCam;
 
+
     private CharacterMovement playerScript;
 
+    int[] SolutionIndexes = { 0, 5, 10, 11, 12, 7, 2, 3, 8, 9, 14 };
+    //   int[] SolutionIndexes = { 0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14 };
+
+
+
     public void SetPlayerScript(CharacterMovement script) { playerScript = script; }
+
+    int currentIndex = 0;
 
     void Start()
     {
@@ -23,10 +32,18 @@ public class PuzzleBoard : MonoBehaviour
         }
         StartingBlock = boardPieces[0];
         EndingBlock = boardPieces[boardPieces.Count - 1]; //Gets the first and last index of the board
-                                                          //So we can track the wire connection
+
+
+        boardPieces[0].GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+
+
+
+        //So we can track the wire connection
         StartingBlock.GetComponent<WirePiece>().SetCanMove(false);
         EndingBlock.GetComponent<WirePiece>().SetCanMove(false);//Makes these block pre determined position 
                                                                 //so these blocks cant be moved by the player
+
+        CheckForConnection();
     }
 
     void Update()
@@ -52,11 +69,35 @@ public class PuzzleBoard : MonoBehaviour
 
         if (value == true)
             Cursor.visible = true;
-        else 
+        else
             Cursor.visible = false;
-        
+
         foreach (GameObject obj in boardPieces)
             obj.SetActive(value);
-        
     }
+
+    public void CheckForConnection()
+    {
+        bool hasBroken = false;
+ 
+        for (int i = 0; i < SolutionIndexes.Length; i++)
+        {
+            var Block = boardPieces[SolutionIndexes[i]].GetComponent<WirePiece>();
+
+            if (Block.CheckWinPosition() && !hasBroken)
+                Block.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+            else
+            {
+                Block.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                hasBroken = true;
+            }
+        }
+
+        if (!hasBroken)
+        {
+            Debug.Log("You have won the puzzle!!!");
+        }
+    }
+
+
 }
