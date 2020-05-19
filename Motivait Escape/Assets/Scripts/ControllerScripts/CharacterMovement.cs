@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -11,14 +12,22 @@ public class CharacterMovement : MonoBehaviour
     public Text UIText;
     public GameObject InspectingObject;
 
-    private static bool isInspecting; //Member Variables
-    private List<string> KeysFound = new List<string>(); 
+
+    private bool isInspecting, PickedUp; //Member Variables
+    private List<string> KeysFound = new List<string>();
+
+    private GameObject pickedUpObject;
 
    public List<string> GetKeysFound() { return KeysFound; }
+
+    public void SetPickedUp(bool value) { PickedUp = value; }
+    public bool GetPickedUp() { return PickedUp; }
 
     public void SetIsInspecting() { isInspecting = !isInspecting; }
     public bool GetIsInspecting() { return isInspecting; }
   
+    public void SetPickedUpObject(GameObject value) { pickedUpObject = value; }
+
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -34,6 +43,11 @@ public class CharacterMovement : MonoBehaviour
         if (!isInspecting)
         {
             Move();
+            if (pickedUpObject != null)
+            {
+                MovePickedUpObject();
+          
+            }
         }
     }
 
@@ -91,6 +105,32 @@ public class CharacterMovement : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    void MovePickedUpObject()
+    {
+        var rigid = pickedUpObject.GetComponent<Rigidbody>();
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rigid.useGravity = true;
+            rigid.isKinematic = false;
+            rigid.AddForce(Camera.main.transform.forward * 1000);
+            pickedUpObject.transform.parent = null;
+            pickedUpObject = null;
+            Debug.Log("Get yeeted");
+        }
+        else
+        {
+            rigid.useGravity = false;
+            rigid.isKinematic = true;
+            pickedUpObject.transform.position = InspectingObject.transform.position;
+            pickedUpObject.transform.rotation = InspectingObject.transform.rotation;
+            pickedUpObject.transform.parent = InspectingObject.transform.parent;
+        }
+
+
+
     }
 
 }

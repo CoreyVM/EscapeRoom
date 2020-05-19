@@ -22,7 +22,6 @@ public class InspectorController : MonoBehaviour
 
     public Text UIText;
 
-    // Start is called before the first frame update
     void Start()
     {
         TextSet = false;
