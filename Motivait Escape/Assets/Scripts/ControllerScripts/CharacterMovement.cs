@@ -61,12 +61,29 @@ public class CharacterMovement : MonoBehaviour
             var cam = Camera.main.transform;
             if (Physics.Raycast(cam.position, cam.forward, out hit, 10))
             {
-                if (hit.transform.gameObject.tag == "Interactable" && !isInspecting)
+                switch (hit.transform.gameObject.tag)
                 {
-                    hitObject = hit.transform.gameObject;
-                    var script = hit.transform.gameObject.GetComponent<InteractionObject>();
-                    script.InteractWithItem(this);
+                    case "Interactable":
+                        if (!isInspecting)
+                        {
+                            if (hit.transform.gameObject.tag == "Interactable" && !isInspecting)
+                            {
+                                hitObject = hit.transform.gameObject;
+                                var script = hit.transform.gameObject.GetComponent<InteractionObject>();
+                                script.InteractWithItem(this);
+                                break;
+                            }
+                        }
+                        break;
+
+                    case "AI":
+                        Debug.Log("This is the AI");
+                        var Script = hit.transform.gameObject.GetComponent<AIInteraction>();
+                        Script.SetHelpText();
+                        break;
                 }
+
+           
             }
 
         }
