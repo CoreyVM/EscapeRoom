@@ -75,6 +75,18 @@ public class InteractionObject : MonoBehaviour
                         }
                         break;
                     case "Keypad Puzzle":
+                        var KeyPad = GameObject.FindGameObjectWithTag("Keypad");
+                        var KeyPadScript = KeyPad.GetComponent<KeypadBoard>();
+                        if (!controller.GetIsInspecting())
+                        {
+                            controller.SetIsInspecting();
+                            controller.SetCameraEnabled(false);
+                            KeyPadScript.SetCameraEnabled(true);
+                            KeyPadScript.SetPlayerScript(controller);
+                            KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = false;
+                            break;
+
+                        }
                         break;
                 }
                 break;
