@@ -8,6 +8,8 @@ TagManager:
   - WirePiece
   - WireBoard
   - Keypad
+  - DoorFront
+  - DoorBack
   layers:
   - Default
   - TransparentFX

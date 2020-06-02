@@ -91,8 +91,16 @@ public class InteractionObject : MonoBehaviour
                 }
                 break;
             case ObjectType.Door:
-                if (controller.GetKeysFound().Capacity > 0)
-                    this.transform.gameObject.GetComponent<DoorInteraction>().UnlockDoor(controller);
+                var DoorScript = this.transform.gameObject.GetComponent<DoorInteraction>();
+             
+                if (!DoorScript.isLocked)
+                {
+                    DoorScript.OpenDoor();
+                    break;
+                }
+
+                else if (controller.GetKeysFound().Capacity > 0)
+                    DoorScript.UnlockDoor(controller);
                 break;
         }
     }
