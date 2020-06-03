@@ -34,13 +34,17 @@ public class DoorInteraction : MonoBehaviour
                 CloseDoor();
                 return;
             }
- 
+
             if (CheckDoorSide() == "Front")
             {
                 animController.SetBool("OpenFront", true);
+                StartCoroutine(DoorCooldown("OpenFront"));
             }
             else
+            {
                 animController.SetBool("OpenBack", true);
+                StartCoroutine(DoorCooldown("OpenBack"));
+            }
             isDoorOpen = true;
         }
       
@@ -51,16 +55,24 @@ public class DoorInteraction : MonoBehaviour
         animController.SetBool("OpenFront", false);
         animController.SetBool("OpenBack", false);
         if (DoorSideOpen == "Front")
+        {
             animController.SetBool("CloseDoorFront", true);
+            StartCoroutine(DoorCooldown("CloseDoorFront"));
+        }
+        else
+        {
+            animController.SetBool("CloseDoorBack", true);
+            StartCoroutine(DoorCooldown("CloseDoorBack"));
+        }
         isDoorOpen = false;
-        StartCoroutine(DoorCooldown());
+      
     }
 
-    IEnumerator DoorCooldown()
+    IEnumerator DoorCooldown(string AnimBoolName)
     {
         canOpen = false;
         yield return new WaitForSeconds(1.1f);
-        animController.SetBool("CloseDoorFront", false);
+        animController.SetBool(AnimBoolName, false);
         canOpen = true;
 
     }
