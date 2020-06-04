@@ -15,7 +15,10 @@ public class CharacterMovement : MonoBehaviour
     private List<string> KeysFound = new List<string>(); 
 
    public List<string> GetKeysFound() { return KeysFound; }
-
+    public GameObject GetHitObject()
+    {
+        return hitObject;
+    }
     public void SetIsInspecting() { isInspecting = !isInspecting; }
     public bool GetIsInspecting() { return isInspecting; }
   

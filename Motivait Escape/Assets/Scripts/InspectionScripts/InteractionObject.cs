@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Key, PC };
+    Inspectable, Key, PC, Light };
 
 public class InteractionObject : MonoBehaviour
 {
@@ -64,6 +64,10 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Door:
                 if (controller.GetKeysFound().Capacity > 0)
                     this.transform.gameObject.GetComponent<DoorInteraction>().UnlockDoor(controller);
+                break;
+            case ObjectType.Light:
+                var LightSwitchScript = controller.GetHitObject().GetComponent<TurnLight>();
+                LightSwitchScript.ToggleLight();
                 break;
         }
     }
