@@ -9,7 +9,6 @@ public class TurnLight : MonoBehaviour
 
   public  void ToggleLight()
     {
-        Debug.Log("RIP TRUMP");
         if (!on)
         {
             on = true;

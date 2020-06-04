@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Key, PC, Light };
+    Inspectable, Key, PC, Light, Screen };
 
 public class InteractionObject : MonoBehaviour
 {
@@ -68,6 +68,10 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Light:
                 var LightSwitchScript = controller.GetHitObject().GetComponent<TurnLight>();
                 LightSwitchScript.ToggleLight();
+                break;
+            case ObjectType.Screen:
+                var ScreenClick = controller.GetHitObject().GetComponent<ScreenClick>();
+                ScreenClick.ToggleScreen();
                 break;
         }
     }

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon - Copy (2)
+  m_Name: Wall
   m_Shader: {fileID: -6465566751694194690, guid: 899e40acc4aac2a459f3dbd2c2685122,
     type: 3}
   m_ShaderKeywords: 
@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1BE55FF6:
-        m_Texture: {fileID: 2800000, guid: 0e00a8e6c03fc3845829c8a46980fab3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f1fd164c26397e4b951c489f9ab853d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -92,7 +92,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_4E8814B4: {r: 1, g: 1, b: 1, a: 0}
+    - Color_4E8814B4: {r: 0, g: 0, b: 0, a: 0}
     - Color_A126801D: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
