@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Key, PC, Light, Screen };
+    Inspectable, Key, PC, Light, Screen, Slide};
 
 public class InteractionObject : MonoBehaviour
 {
@@ -72,6 +72,10 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Screen:
                 var ScreenClick = controller.GetHitObject().GetComponent<ScreenClick>();
                 ScreenClick.ToggleScreen();
+                break;
+            case ObjectType.Slide:
+                var SlideClick = controller.GetHitObject().GetComponent<ProjectorClick>();
+                SlideClick.ToggleSlide();
                 break;
         }
     }
