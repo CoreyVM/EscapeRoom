@@ -11,18 +11,39 @@ public class KeypadKey : MonoBehaviour
     public void SetKeyPressed(bool value) { KeyPressed = value; }
     public bool GetKeyPressed() { return KeyPressed; }
 
+    private Animation animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animation>();
+    }
 
     private void OnMouseDown()
     {
         if (!KeyPressed && boardScript != null)
         {
-            Debug.Log("I have pressed the key");
             KeyPressed = true;
-            this.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow); //Remove this when we have models with animations
-            boardScript.InsertKeyCombination(KeyPadValue);
+            //   this.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow); //Remove this when we have models with animations
             boardScript.IncrementKeyPressed();
+            boardScript.InsertKeyCombination(KeyPadValue);
+            animator.Play("ButtonPressed" + ParseGameObjectNumericalValue());
         }
-        else
-            Debug.Log("The key didnt work");
+    }
+
+    string ParseGameObjectNumericalValue()
+    {
+        string ButtonName = this.transform.gameObject.name;
+        string Value = ButtonName.Substring(12);
+        return Value;
+    }
+
+    public void ResetAnimation()
+    {
+        animator.Play("ButtonReleased" + ParseGameObjectNumericalValue());
+    }
+
+    public void AddNumberToSolution()
+    {
+        boardScript.CheckForCompleteCombination();
     }
 }

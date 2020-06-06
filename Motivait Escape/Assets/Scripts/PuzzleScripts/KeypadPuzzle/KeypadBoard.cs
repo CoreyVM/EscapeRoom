@@ -26,6 +26,8 @@ public class KeypadBoard : MonoBehaviour
                 this.transform.parent.GetComponent<BoxCollider>().enabled = true;
             }
         }
+
+        Debug.Log(KeysPressedIndex);
     }
 
 
@@ -42,7 +44,6 @@ public class KeypadBoard : MonoBehaviour
             obj.transform.gameObject.SetActive(value);
         }
     }
-
 
     void CheckForSolution()
     {
@@ -70,10 +71,12 @@ public class KeypadBoard : MonoBehaviour
     public void IncrementKeyPressed() 
     {
         ++KeysPressedIndex;
+    }
+
+    public void CheckForCompleteCombination()
+    {
         if (KeysPressedIndex >= 4)
-        {
             CheckForSolution();
-        }
     }
 
     public void InsertKeyCombination(int value) {
@@ -85,8 +88,10 @@ public class KeypadBoard : MonoBehaviour
         for (int i = 0; i < Keypads.Length; i++) {
             if (Keypads[i].GetKeyPressed())
             {
+                Debug.Log(i);
                 Keypads[i].SetKeyPressed(false);
-                Keypads[i].transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.white); //Remove this when we have models with animations
+                Keypads[i].ResetAnimation();
+            //    Keypads[i].transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.white); //Remove this when we have models with animations
             }
         }
         UserSolution.Clear();
