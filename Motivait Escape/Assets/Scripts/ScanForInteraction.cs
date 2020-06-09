@@ -29,18 +29,12 @@ public class ScanForInteraction : MonoBehaviour
                 {
                     hitObject = hit.transform.gameObject;
                     var ObjectScript = hit.transform.gameObject.GetComponent<InteractionObject>();
-                    hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 1.1f);
-                    
-                    if (!TextSet)
-                    {
-                        UIText.text = "This item is: " + ObjectScript.ItemName;
-                        TextSet = true;
-                    }
+                    hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 1.1f);                 
                 }
                 else
                 {
-                    UIText.text = "";
-                    TextSet = false;
+                    ////UIText.text = "";
+                    //TextSet = false;
                     if (hit.transform.gameObject != hitObject && hitObject != null)
                     {
                         hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0);

@@ -70,12 +70,13 @@ public class InteractionObject : MonoBehaviour
                 LightSwitchScript.ToggleLight();
                 break;
             case ObjectType.Screen:
-                var ScreenClick = controller.GetHitObject().GetComponent<ScreenClick>();
-                ScreenClick.ToggleScreen();
+                var ScreenScript = controller.GetHitObject().GetComponent<Screen>();
+                ScreenScript.InteractiveScreen();
+                Debug.Log("ha");
                 break;
             case ObjectType.Slide:
-                var SlideClick = controller.GetHitObject().GetComponent<ProjectorClick>();
-                SlideClick.ToggleSlide();
+                var SlideScript = controller.GetHitObject().GetComponent<ProjectorClick>();
+                SlideScript.ToggleSlide();
                 break;
         }
     }
@@ -87,7 +88,11 @@ public class InteractionObject : MonoBehaviour
 
     private void InspectObject(CharacterMovement controller)
     {
-        controller.SetIsInspecting();
+        if (!controller.GetIsInspecting())
+            controller.SetIsInspecting(true);
+        else 
+            controller.SetIsInspecting(false);
+
         controller.UIText.text = "";
         var inspector = controller.InspectingObject.GetComponent<InspectorController>();
         inspector.SetCanRead(this.canRead);
