@@ -13,10 +13,7 @@ public class PuzzleBoard : MonoBehaviour
     private CharacterMovement playerScript;
 
     int[] SolutionIndexes = { 0, 5, 10, 11, 12, 7, 2, 3, 8, 9, 14 };
-    //   int[] SolutionIndexes = { 0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14 };
-
-
-
+  
     public void SetPlayerScript(CharacterMovement script) { playerScript = script; }
 
     int currentIndex = 0;

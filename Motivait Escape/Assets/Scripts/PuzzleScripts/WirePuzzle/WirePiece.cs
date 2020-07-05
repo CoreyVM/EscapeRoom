@@ -24,7 +24,6 @@ public class WirePiece : MonoBehaviour
     {
         canMove = true;
         SetPiecePosition();
-        CheckForConnection();
         BoardScript = GetComponentInParent<PuzzleBoard>();
     }
 
@@ -81,15 +80,6 @@ public class WirePiece : MonoBehaviour
         }
      
     }
-
-    void CheckForConnection()
-    {
-        if (isActive)
-        {
-
-        }
-    }
-
     private void OnMouseDown()
     {
         if (canMove)

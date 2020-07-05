@@ -79,12 +79,32 @@ public class InteractionObject : MonoBehaviour
                         }
                         break;
                     case "Keypad Puzzle":
+                        var KeyPad = GameObject.FindGameObjectWithTag("Keypad");
+                        var KeyPadScript = KeyPad.GetComponent<KeypadBoard>();
+                        if (!controller.GetIsInspecting())
+                        {
+                            controller.SetIsInspecting();
+                            controller.SetCameraEnabled(false);
+                            KeyPadScript.SetCameraEnabled(true);
+                            KeyPadScript.SetPlayerScript(controller);
+                            KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = false;
+                            break;
+
+                        }
                         break;
                 }
                 break;
             case ObjectType.Door:
-                if (controller.GetKeysFound().Capacity > 0)
-                    this.transform.gameObject.GetComponent<DoorInteraction>().UnlockDoor(controller);
+                var DoorScript = this.transform.gameObject.GetComponent<DoorInteraction>();
+             
+                if (!DoorScript.isLocked)
+                {
+                    DoorScript.OpenDoor();
+                    break;
+                }
+
+                else if (controller.GetKeysFound().Capacity > 0)
+                    DoorScript.UnlockDoor(controller);
                 break;
         }
     }
