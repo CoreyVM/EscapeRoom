@@ -128,7 +128,6 @@ public class InteractionObject : MonoBehaviour
 
     public void PickUpObject(CharacterMovement controller)
     {
-
         if (!controller.GetPickedUp())
         {
             controller.SetPickedUpObject(this.transform.gameObject);
@@ -139,6 +138,5 @@ public class InteractionObject : MonoBehaviour
             controller.SetPickedUp(false);
             controller.SetPickedUpObject(null);
         }
-     //   controller.SetPickedUp();
     }
 }

@@ -18,6 +18,9 @@ public class CharacterMovement : MonoBehaviour
     private List<string> KeysFound = new List<string>();
 
     private GameObject pickedUpObject;
+    public void SetPickedUpObject(GameObject value) { pickedUpObject = value; }
+    public void SetPickedUp(bool value) { PickedUp = value; }
+    public bool GetPickedUp() { return PickedUp; }
 
    public List<string> GetKeysFound() { return KeysFound; }
 
