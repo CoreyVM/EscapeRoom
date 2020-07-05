@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Key, PC };
+    Inspectable, Interactable,
+    Key, PC };
 
 public class InteractionObject : MonoBehaviour
 {
@@ -53,6 +54,9 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Inspectable:
                 InspectObject(controller);
                 break;
+            case ObjectType.Interactable:
+                PickUpObject(controller);
+                break;
             case ObjectType.Key:
                 controller.AddKey(ItemName);
                 Destroy(this.gameObject);
@@ -92,6 +96,7 @@ public class InteractionObject : MonoBehaviour
 
     private void InspectObject(CharacterMovement controller)
     {
+      //  var PlayerRef = GameObject.FindGameObjectWithTag("Player");
         controller.SetIsInspecting();
         controller.UIText.text = "";
         var inspector = controller.InspectingObject.GetComponent<InspectorController>();
@@ -99,5 +104,21 @@ public class InteractionObject : MonoBehaviour
         inspector.SetObjectScript(this);
         this.SetInteractionObject(controller.InspectingObject);
         SetObjectVisiblity(false);
+    }
+
+    public void PickUpObject(CharacterMovement controller)
+    {
+
+        if (!controller.GetPickedUp())
+        {
+            controller.SetPickedUpObject(this.transform.gameObject);
+            controller.SetPickedUp(true);
+        }
+        else
+        {
+            controller.SetPickedUp(false);
+            controller.SetPickedUpObject(null);
+        }
+     //   controller.SetPickedUp();
     }
 }
