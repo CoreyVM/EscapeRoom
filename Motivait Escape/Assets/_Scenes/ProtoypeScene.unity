@@ -5622,6 +5622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 
   ItemDescription: 
+  PuzzleType: 
   ItemType: 6
   ObjectMesh: {fileID: 0}
   canRead: 0
@@ -11190,6 +11191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 
   ItemDescription: 
+  PuzzleType: 
   ItemType: 8
   ObjectMesh: {fileID: 0}
   canRead: 0
@@ -12092,7 +12094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 
   ItemDescription: 
-  ItemType: 7
+  PuzzleType: 
+  ItemType: 8
   ObjectMesh: {fileID: 0}
   canRead: 0
 --- !u!64 &7473107469529970975

@@ -14,14 +14,14 @@ public class Screen : MonoBehaviour
         {
             IsInteracting = true;
             ActiveCanvas.SetActive(true);
-            playerRef.SetIsInspecting(true);
+            playerRef.SetIsInspecting();
             Cursor.visible = true;
         }
         else
         {
             IsInteracting = false;
             ActiveCanvas.SetActive(false);
-            playerRef.SetIsInspecting(false);
+            playerRef.SetIsInspecting();
             Cursor.visible = false;
         }
     }

@@ -27,7 +27,7 @@ public class CharacterMovement : MonoBehaviour
     {
         return hitObject;
     }
-    public void SetIsInspecting(bool value) { isInspecting = value; }
+    public void SetIsInspecting() { isInspecting = !isInspecting; }
     public bool GetIsInspecting() { return isInspecting; }
 
     public void SetCameraEnabled(bool value) { PlayerCamera.enabled = value; }

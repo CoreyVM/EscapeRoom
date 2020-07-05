@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Key, PC, Light, Screen, Slide};
+    Inspectable, Interactable, Key, PC, Light, Screen, Slide};
 
 public class InteractionObject : MonoBehaviour
 {
@@ -128,10 +128,7 @@ public class InteractionObject : MonoBehaviour
 
     private void InspectObject(CharacterMovement controller)
     {
-        if (!controller.GetIsInspecting())
-            controller.SetIsInspecting(true);
-        else 
-            controller.SetIsInspecting(false);
+        controller.SetIsInspecting();
 
         controller.UIText.text = "";
         var inspector = controller.InspectingObject.GetComponent<InspectorController>();
