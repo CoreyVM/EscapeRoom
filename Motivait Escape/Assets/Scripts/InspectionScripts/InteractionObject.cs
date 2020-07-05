@@ -5,8 +5,7 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Interactable,
-    Key, PC };
+    Inspectable, Key, PC, Light, Screen, Slide};
 
 public class InteractionObject : MonoBehaviour
 {
@@ -106,6 +105,19 @@ public class InteractionObject : MonoBehaviour
                 else if (controller.GetKeysFound().Capacity > 0)
                     DoorScript.UnlockDoor(controller);
                 break;
+            case ObjectType.Light:
+                var LightSwitchScript = controller.GetHitObject().GetComponent<TurnLight>();
+                LightSwitchScript.ToggleLight();
+                break;
+            case ObjectType.Screen:
+                var ScreenScript = controller.GetHitObject().GetComponent<Screen>();
+                ScreenScript.InteractiveScreen();
+                Debug.Log("ha");
+                break;
+            case ObjectType.Slide:
+                var SlideScript = controller.GetHitObject().GetComponent<ProjectorClick>();
+                SlideScript.ToggleSlide();
+                break;
         }
     }
 
@@ -116,8 +128,11 @@ public class InteractionObject : MonoBehaviour
 
     private void InspectObject(CharacterMovement controller)
     {
-      //  var PlayerRef = GameObject.FindGameObjectWithTag("Player");
-        controller.SetIsInspecting();
+        if (!controller.GetIsInspecting())
+            controller.SetIsInspecting(true);
+        else 
+            controller.SetIsInspecting(false);
+
         controller.UIText.text = "";
         var inspector = controller.InspectingObject.GetComponent<InspectorController>();
         inspector.SetCanRead(this.canRead);

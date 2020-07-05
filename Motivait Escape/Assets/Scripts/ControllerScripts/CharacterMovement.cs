@@ -23,9 +23,11 @@ public class CharacterMovement : MonoBehaviour
     public bool GetPickedUp() { return PickedUp; }
 
    public List<string> GetKeysFound() { return KeysFound; }
-
-
-    public void SetIsInspecting() { isInspecting = !isInspecting; }
+    public GameObject GetHitObject()
+    {
+        return hitObject;
+    }
+    public void SetIsInspecting(bool value) { isInspecting = value; }
     public bool GetIsInspecting() { return isInspecting; }
 
     public void SetCameraEnabled(bool value) { PlayerCamera.enabled = value; }
@@ -67,13 +69,13 @@ public class CharacterMovement : MonoBehaviour
 
     private void InteractWithObject()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !isInspecting && PlayerCamera.enabled == true) //Interacts with the object 
+        if (Input.GetKeyDown(KeyCode.F))/*&& !isInspecting)*/ //Interacts with the object 
         {
             RaycastHit hit;
             var cam = Camera.main.transform;
             if (Physics.Raycast(cam.position, cam.forward, out hit, 10))
             {
-                if (hit.transform.gameObject.tag == "Interactable" && !isInspecting)
+                if (hit.transform.gameObject.tag == "Interactable" )/*&& !isInspecting)*/
                 {
                     hitObject = hit.transform.gameObject;
                     var script = hit.transform.gameObject.GetComponent<InteractionObject>();
@@ -90,6 +92,7 @@ public class CharacterMovement : MonoBehaviour
             InspectingObject.GetComponent<InspectorController>().ResetValues();
         }
     }
+
 
     public void AddKey(string Name)
     {
