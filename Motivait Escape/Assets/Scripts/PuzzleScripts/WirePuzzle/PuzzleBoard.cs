@@ -51,10 +51,12 @@ public class PuzzleBoard : MonoBehaviour
             {
                 if (playerScript.GetIsInspecting())
                 {
-                    playerScript.SetIsInspecting();
+                    playerScript.SetIsInspecting(false);
                     playerScript.SetCameraEnabled(true);
                     SetCameraEnabled(false);
                 }
+                else
+                    playerScript.SetIsInspecting(true);
             }
         }
     }

@@ -70,19 +70,21 @@ public class InteractionObject : MonoBehaviour
                         var BoardScript = Board.GetComponent<PuzzleBoard>();
                         if (!controller.GetIsInspecting())
                         {
-                            controller.SetIsInspecting();
+                            controller.SetIsInspecting(true);
                             controller.SetCameraEnabled(false);
                             BoardScript.SetCameraEnabled(true);
                             BoardScript.SetPlayerScript(controller);
                             break;
                         }
+                        else
+                            controller.SetIsInspecting(false);
                         break;
                     case "Keypad Puzzle":
                         var KeyPad = GameObject.FindGameObjectWithTag("Keypad");
                         var KeyPadScript = KeyPad.GetComponent<KeypadBoard>();
                         if (!controller.GetIsInspecting())
                         {
-                            controller.SetIsInspecting();
+                            controller.SetIsInspecting(true);
                             controller.SetCameraEnabled(false);
                             KeyPadScript.SetCameraEnabled(true);
                             KeyPadScript.SetPlayerScript(controller);
@@ -90,6 +92,8 @@ public class InteractionObject : MonoBehaviour
                             break;
 
                         }
+                        else 
+                            controller.SetIsInspecting(false);
                         break;
                 }
                 break;
@@ -128,14 +132,24 @@ public class InteractionObject : MonoBehaviour
 
     private void InspectObject(CharacterMovement controller)
     {
-        controller.SetIsInspecting();
+        if (!controller.GetIsInspecting())
+        {
+            controller.SetIsInspecting(true);
+            controller.UIText.text = "";
+            var inspector = controller.InspectingObject.GetComponent<InspectorController>();
+            inspector.SetCanRead(this.canRead);
+            inspector.SetObjectScript(this);
+            this.SetInteractionObject(controller.InspectingObject);
+            SetObjectVisiblity(false);
+        }
+    
+        //else if(controller.GetIsInspecting())
+        //{
+        //    controller.SetIsInspecting(false);
+        //}
+        
 
-        controller.UIText.text = "";
-        var inspector = controller.InspectingObject.GetComponent<InspectorController>();
-        inspector.SetCanRead(this.canRead);
-        inspector.SetObjectScript(this);
-        this.SetInteractionObject(controller.InspectingObject);
-        SetObjectVisiblity(false);
+      
     }
 
     public void PickUpObject(CharacterMovement controller)

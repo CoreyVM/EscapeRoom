@@ -13,13 +13,13 @@ public class ProjectorClick : MonoBehaviour
         if (!on)
         {
             on = true;
-            Slide.enabled = false;
+            Slide.enabled = true;
         }
 
         else
         {
             on = false;
-            Slide.enabled = !Slide.enabled;
+            Slide.enabled = false;
         }
     }
 }

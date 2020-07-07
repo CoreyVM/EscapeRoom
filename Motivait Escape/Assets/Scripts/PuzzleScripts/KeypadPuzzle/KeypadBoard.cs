@@ -19,7 +19,9 @@ public class KeypadBoard : MonoBehaviour
         {
             if (playerScript != null)
             {
-                playerScript.SetIsInspecting();
+                if (playerScript.GetIsInspecting())
+                    playerScript.SetIsInspecting(false);
+              
                 playerScript.SetCameraEnabled(true);
                 SetCameraEnabled(false);
                 ResetKeypad();
