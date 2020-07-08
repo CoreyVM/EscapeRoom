@@ -22,6 +22,7 @@ public class CharacterMovement : MonoBehaviour
     public void SetPickedUp(bool value) { PickedUp = value; }
     public bool GetPickedUp() { return PickedUp; }
 
+    public GameObject GetPickedUpObject() { return pickedUpObject; }
    public List<string> GetKeysFound() { return KeysFound; }
     public GameObject GetHitObject()
     {
@@ -41,6 +42,7 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         InteractWithObject();
+     //   Debug.Log(isInspecting);
     }
 
     private void FixedUpdate()
@@ -68,7 +70,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void InteractWithObject()
     {
-        if (Input.GetKeyDown(KeyCode.F)&& !isInspecting) //Interacts with the object 
+        if (Input.GetKeyDown(KeyCode.F) && !isInspecting) //Interacts with the object if not already interacting
         {
             RaycastHit hit;
             var cam = Camera.main.transform;
@@ -82,12 +84,30 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.F) && isInspecting)
+        else if (Input.GetKeyDown(KeyCode.F) && isInspecting) //IF the player is interacting with an object
         {
-            var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
-            script.RemoveInteractionObject(InspectingObject);
-            isInspecting = false;
-            InspectingObject.GetComponent<InspectorController>().ResetValues();
+            if (hitObject != null)
+            {
+                var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
+                if (script)
+                {
+                    script.InteractWithItem(this);
+                }
+            }
+
+            //if (InspectingObject)
+            //{
+            //    var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
+            //    script.RemoveInteractionObject(InspectingObject);
+            //   // isInspecting = false;
+            //    InspectingObject.GetComponent<InspectorController>().ResetValues();
+            //}
+            //else
+            //{
+            //    var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
+            //    script.InteractWithItem(this);
+            //}
+          
         }
     }
 
@@ -113,27 +133,11 @@ public class CharacterMovement : MonoBehaviour
     void MovePickedUpObject()
     {
         var rigid = pickedUpObject.GetComponent<Rigidbody>();
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            rigid.useGravity = true;
-            rigid.isKinematic = false;
-            rigid.AddForce(Camera.main.transform.forward * 1000);
-            pickedUpObject.transform.parent = null;
-            pickedUpObject = null;
-            Debug.Log("Get yeeted");
-        }
-        else
-        {
-            rigid.useGravity = false;
-            rigid.isKinematic = true;
-            pickedUpObject.transform.position = InspectingObject.transform.position;
-            pickedUpObject.transform.rotation = InspectingObject.transform.rotation;
-            pickedUpObject.transform.parent = InspectingObject.transform.parent;
-        }
-
-
-
+        rigid.useGravity = false;
+        rigid.isKinematic = true;
+        pickedUpObject.transform.position = InspectingObject.transform.position;
+        pickedUpObject.transform.rotation = InspectingObject.transform.rotation;
+        pickedUpObject.transform.parent = InspectingObject.transform.parent;
     }
 
 }

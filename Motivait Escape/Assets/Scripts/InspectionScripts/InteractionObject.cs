@@ -55,8 +55,22 @@ public class InteractionObject : MonoBehaviour
                 InspectObject(controller);
                 break;
             case ObjectType.Interactable:
-                PickUpObject(controller);
-                break;
+                if (!controller.GetPickedUp())
+                {
+                    PickUpObject(controller);
+                    break;
+                }
+                else
+                {
+                    var rigid = controller.GetPickedUpObject().GetComponent<Rigidbody>();
+                    rigid.useGravity = true;
+                    rigid.isKinematic = false;
+                    rigid.AddForce(Camera.main.transform.forward * 500);
+                    rigid.transform.parent = null;
+                    controller.SetPickedUp(false);
+                    controller.SetPickedUpObject(null);
+                    break;
+                }  
             case ObjectType.Key:
                 controller.AddKey(ItemName);
                 Destroy(this.gameObject);
@@ -78,7 +92,13 @@ public class InteractionObject : MonoBehaviour
                             break;
                         }
                         else
+                        {
                             controller.SetIsInspecting(false);
+                            controller.SetCameraEnabled(true);
+                            BoardScript.SetCameraEnabled(false);
+                            BoardScript.SetPlayerScript(null);
+                        }
+                        
                         break;
                     case "Keypad Puzzle":
                         var KeyPad = GameObject.FindGameObjectWithTag("Keypad");
@@ -93,20 +113,24 @@ public class InteractionObject : MonoBehaviour
                             break;
 
                         }
-                        else 
+                        else
+                        {
                             controller.SetIsInspecting(false);
-                        break;
+                            controller.SetCameraEnabled(true);
+                            KeyPadScript.SetCameraEnabled(false);
+                            KeyPadScript.SetPlayerScript(null);
+                            KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = true;
+                            break;
+                        }
                 }
                 break;
             case ObjectType.Door:
                 var DoorScript = this.transform.gameObject.GetComponent<DoorInteraction>();
-             
                 if (!DoorScript.isLocked)
                 {
                     DoorScript.OpenDoor();
                     break;
                 }
-
                 else if (controller.GetKeysFound().Capacity > 0)
                     DoorScript.UnlockDoor(controller);
                 break;
@@ -117,7 +141,6 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Screen:
                 var ScreenScript = controller.GetHitObject().GetComponent<Screen>();
                 ScreenScript.InteractiveScreen();
-                Debug.Log("ha");
                 break;
             case ObjectType.Slide:
                 var SlideScript = controller.GetHitObject().GetComponent<ProjectorClick>();
@@ -143,7 +166,12 @@ public class InteractionObject : MonoBehaviour
             this.SetInteractionObject(controller.InspectingObject);
             SetObjectVisiblity(false);
         }
-    
+        else
+        {
+            controller.SetIsInspecting(false);
+            this.RemoveInteractionObject(controller.InspectingObject);
+            controller.InspectingObject.GetComponent<InspectorController>().ResetValues();
+        }
         //else if(controller.GetIsInspecting())
         //{
         //    controller.SetIsInspecting(false);

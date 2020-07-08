@@ -23,7 +23,7 @@ public class KeypadKey : MonoBehaviour
         if (!KeyPressed && boardScript != null)
         {
             KeyPressed = true;
-            //   this.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow); //Remove this when we have models with animations
+            this.transform.gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.yellow); //Remove this when we have models with animations
             boardScript.IncrementKeyPressed();
             boardScript.InsertKeyCombination(KeyPadValue);
             animator.Play("ButtonPressed" + ParseGameObjectNumericalValue());
@@ -40,6 +40,7 @@ public class KeypadKey : MonoBehaviour
     public void ResetAnimation()
     {
         animator.Play("ButtonReleased" + ParseGameObjectNumericalValue());
+        this.transform.gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.white); //Remove this when we have models with animations
     }
 
     public void AddNumberToSolution()

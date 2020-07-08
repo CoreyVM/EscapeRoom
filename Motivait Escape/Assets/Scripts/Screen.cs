@@ -16,13 +16,15 @@ public class Screen : MonoBehaviour
             ActiveCanvas.SetActive(true);
             playerRef.SetIsInspecting(true);
             Cursor.visible = true;
+            Debug.Log("Lock the player camrea");
         }
-        else
+        else if(IsInteracting)
         {
             IsInteracting = false;
             ActiveCanvas.SetActive(false);
             playerRef.SetIsInspecting(false);
             Cursor.visible = false;
+            Debug.Log("Unclock the camera");
         }
     }
 }
