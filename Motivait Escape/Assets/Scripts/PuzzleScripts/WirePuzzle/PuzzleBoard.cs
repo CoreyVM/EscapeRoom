@@ -82,12 +82,14 @@ public class PuzzleBoard : MonoBehaviour
         for (int i = 0; i < SolutionIndexes.Length; i++)
         {
             var Block = boardPieces[SolutionIndexes[i]].GetComponent<WirePiece>();
-
+            var PropertyBlock = new MaterialPropertyBlock();
+            PropertyBlock.SetColor("_BaseColor", Color.yellow);
             if (Block.CheckWinPosition() && !hasBroken)
-                Block.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                Block.GetComponent<Renderer>().SetPropertyBlock(PropertyBlock);
             else
             {
-                Block.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                PropertyBlock.SetColor("_BaseColor", Color.white);
+                Block.GetComponent<Renderer>().SetPropertyBlock(PropertyBlock);
                 hasBroken = true;
             }
         }
