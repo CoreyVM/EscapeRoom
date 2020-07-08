@@ -39,7 +39,7 @@ public class PuzzleBoard : MonoBehaviour
         StartingBlock.GetComponent<WirePiece>().SetCanMove(false);
         EndingBlock.GetComponent<WirePiece>().SetCanMove(false);//Makes these block pre determined position 
                                                                 //so these blocks cant be moved by the player
-
+        Debug.Log(boardPieces.Count);
         CheckForConnection();
     }
 

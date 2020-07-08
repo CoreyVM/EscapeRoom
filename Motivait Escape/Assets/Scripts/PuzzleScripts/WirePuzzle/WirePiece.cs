@@ -24,6 +24,7 @@ public class WirePiece : MonoBehaviour
     {
         canMove = true;
         SetPiecePosition();
+        CheckWinPosition();
         BoardScript = GetComponentInParent<PuzzleBoard>();
     }
 
@@ -66,20 +67,21 @@ public class WirePiece : MonoBehaviour
         switch (BlockPosition)
         {
             case 1:
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 0);   // 0 , 0 , 0 
                 break;
             case 2:
-                transform.rotation = Quaternion.Euler(-90, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 90); // -90  0  0
                 break;
             case 3:
-                transform.rotation = Quaternion.Euler(-180, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 180); // -180 , 0 , 0
                 break;
             case 4:
-                transform.rotation = Quaternion.Euler(-270, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 270);  //-270 , 0 , 0
                 break;
         }
      
     }
+
     private void OnMouseDown()
     {
         if (canMove)
@@ -87,12 +89,9 @@ public class WirePiece : MonoBehaviour
             BlockPosition++;
             if (BlockPosition > 4)
                 BlockPosition = 1;
-
-        //    Debug.Log(this.BlockPosition);
             SetPiecePosition();
             BoardScript.CheckForConnection();
-            
-        }
+        }      
     }
 
 }

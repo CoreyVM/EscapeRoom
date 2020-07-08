@@ -41,7 +41,6 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         InteractWithObject();
-        Debug.Log(isInspecting);
     }
 
     private void FixedUpdate()
