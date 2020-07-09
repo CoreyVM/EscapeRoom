@@ -28,8 +28,6 @@ public class KeypadBoard : MonoBehaviour
                 this.transform.parent.GetComponent<BoxCollider>().enabled = true;
             }
         }
-
-        Debug.Log(KeysPressedIndex);
     }
 
 
