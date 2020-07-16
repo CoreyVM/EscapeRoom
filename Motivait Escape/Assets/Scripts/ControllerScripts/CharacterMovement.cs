@@ -13,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public Text UIText;
     public GameObject InspectingObject;
 
-    public GameObject OptionScreen;
+    public Canvas OptionScreen;
 
     private bool isInspecting, PickedUp; //Member Variables
     private List<string> KeysFound = new List<string>();
@@ -46,7 +46,7 @@ public class CharacterMovement : MonoBehaviour
         InteractWithObject();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (OptionScreen.activeSelf)
+            if (OptionScreen.enabled)
             {
                 ShowOptionScreen(false);
                 
@@ -153,6 +153,7 @@ public class CharacterMovement : MonoBehaviour
 
     void ShowOptionScreen(bool value)
     {
-        OptionScreen.SetActive(value);
+        OptionScreen.enabled = value;
+        isInspecting = value;
     }
 }
