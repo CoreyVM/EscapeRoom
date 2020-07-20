@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public Text UIText;
     public GameObject InspectingObject;
 
+    public bool hasScrewdriver;
 
     private bool isInspecting, PickedUp; //Member Variables
     private List<string> KeysFound = new List<string>();
@@ -38,6 +39,7 @@ public class CharacterMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         PlayerCamera = GetComponentInChildren<Camera>();
         KeysFound.Clear();
+        hasScrewdriver = false;
     }
     void Update()
     {

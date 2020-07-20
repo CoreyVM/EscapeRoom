@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Interactable, Key, PC, Light, Screen, Slide};
+    Inspectable, Interactable, Key, PC, Light, Screen, Slide, Printer, Screwdriver};
 
 public class InteractionObject : MonoBehaviour
 {
@@ -145,6 +145,15 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Slide:
                 var SlideScript = controller.GetHitObject().GetComponent<ProjectorClick>();
                 SlideScript.ToggleSlide();
+                break;
+            case ObjectType.Printer:
+                var PrinterScript = controller.GetHitObject().GetComponent<PrinterInteraction>();
+                PrinterScript.Interact();
+                break;
+            case ObjectType.Screwdriver:
+                Debug.Log("Newcastle");
+                var screwdriverScript = controller.GetHitObject().GetComponent<ScrewdriverInteraction>();
+                screwdriverScript.Interact();
                 break;
         }
     }
