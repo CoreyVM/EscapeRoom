@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public Text UIText;
     public GameObject InspectingObject;
 
+    public Canvas OptionScreen;
 
     private bool isInspecting, PickedUp; //Member Variables
     private List<string> KeysFound = new List<string>();
@@ -38,11 +39,21 @@ public class CharacterMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         PlayerCamera = GetComponentInChildren<Camera>();
         KeysFound.Clear();
+        ShowOptionScreen(false);
     }
     void Update()
     {
         InteractWithObject();
-     //   Debug.Log(isInspecting);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (OptionScreen.enabled)
+            {
+                ShowOptionScreen(false);
+                
+            }
+            else
+                ShowOptionScreen(true);
+        }
     }
 
     private void FixedUpdate()
@@ -140,4 +151,9 @@ public class CharacterMovement : MonoBehaviour
         pickedUpObject.transform.parent = InspectingObject.transform.parent;
     }
 
+    void ShowOptionScreen(bool value)
+    {
+        OptionScreen.enabled = value;
+        isInspecting = value;
+    }
 }

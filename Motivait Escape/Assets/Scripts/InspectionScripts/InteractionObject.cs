@@ -139,7 +139,7 @@ public class InteractionObject : MonoBehaviour
                 LightSwitchScript.ToggleLight();
                 break;
             case ObjectType.Screen:
-                var ScreenScript = controller.GetHitObject().GetComponent<Screen>();
+                var ScreenScript = controller.GetHitObject().GetComponent<PCScreen>();
                 ScreenScript.InteractiveScreen();
                 break;
             case ObjectType.Slide:
