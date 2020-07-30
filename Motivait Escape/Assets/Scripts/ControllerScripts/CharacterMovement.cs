@@ -24,7 +24,7 @@ public class CharacterMovement : MonoBehaviour
     public bool GetPickedUp() { return PickedUp; }
 
     public GameObject GetPickedUpObject() { return pickedUpObject; }
-   public List<string> GetKeysFound() { return KeysFound; }
+    public List<string> GetKeysFound() { return KeysFound; }
     public GameObject GetHitObject()
     {
         return hitObject;
@@ -49,7 +49,7 @@ public class CharacterMovement : MonoBehaviour
             if (OptionScreen.enabled)
             {
                 ShowOptionScreen(false);
-                
+
             }
             else
                 ShowOptionScreen(true);
@@ -76,8 +76,9 @@ public class CharacterMovement : MonoBehaviour
         Vector3 movement = new Vector3(hAxis, 0, yAxis) * moveSpeed;
 
         Vector3 newPosition = rigid.position + rigid.transform.TransformDirection(movement) * Time.deltaTime;
-        rigid.MovePosition(newPosition);  
+        rigid.MovePosition(newPosition);
     }
+
 
     private void InteractWithObject()
     {
@@ -87,14 +88,12 @@ public class CharacterMovement : MonoBehaviour
             var cam = Camera.main.transform;
             if (Physics.Raycast(cam.position, cam.forward, out hit, 10))
             {
-                switch (hit.transform.gameObject.tag)
+                if (hit.transform.gameObject.tag == "Interactable" && !isInspecting)
                 {
                     hitObject = hit.transform.gameObject;
                     var script = hit.transform.gameObject.GetComponent<InteractionObject>();
                     script.InteractWithItem();
                 }
-
-           
             }
         }
         else if (Input.GetKeyDown(KeyCode.F) && isInspecting) //IF the player is interacting with an object
@@ -109,6 +108,7 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
+
 
     public void AddKey(string Name)
     {

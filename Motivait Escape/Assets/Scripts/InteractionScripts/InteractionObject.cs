@@ -6,7 +6,9 @@ using UnityEngine;
 
 public enum ObjectType {
     None, Puzzle, Door,
-    Inspectable, Interactable, Key, PC, Light, Screen, Slide};
+    Inspectable, Interactable, 
+    Key, PC, Light, 
+    Screen, Slide, AI};
 
 public class InteractionObject : MonoBehaviour
 {
@@ -89,6 +91,10 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.Slide:
                 var SlideScript = controller.GetHitObject().GetComponent<ProjectorClick>();
                 SlideScript.ToggleSlide();
+                break;
+            case ObjectType.AI:
+                var AIScript = controller.GetHitObject().GetComponent<AIInteraction>();
+                AIScript.SetHelpText();
                 break;
         }
     }
