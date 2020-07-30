@@ -105,20 +105,6 @@ public class CharacterMovement : MonoBehaviour
                     script.InteractWithItem();
                 }
             }
-
-            //if (InspectingObject)
-            //{
-            //    var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
-            //    script.RemoveInteractionObject(InspectingObject);
-            //   // isInspecting = false;
-            //    InspectingObject.GetComponent<InspectorController>().ResetValues();
-            //}
-            //else
-            //{
-            //    var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
-            //    script.InteractWithItem(this);
-            //}
-          
         }
     }
 
