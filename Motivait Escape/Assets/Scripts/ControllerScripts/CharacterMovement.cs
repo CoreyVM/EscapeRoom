@@ -109,7 +109,6 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-
     public void AddKey(string Name)
     {
         KeysFound.Add(Name);
