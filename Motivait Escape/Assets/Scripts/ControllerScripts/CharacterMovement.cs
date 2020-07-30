@@ -87,12 +87,14 @@ public class CharacterMovement : MonoBehaviour
             var cam = Camera.main.transform;
             if (Physics.Raycast(cam.position, cam.forward, out hit, 10))
             {
-                if (hit.transform.gameObject.tag == "Interactable" && !isInspecting)
+                switch (hit.transform.gameObject.tag)
                 {
                     hitObject = hit.transform.gameObject;
                     var script = hit.transform.gameObject.GetComponent<InteractionObject>();
                     script.InteractWithItem();
                 }
+
+           
             }
         }
         else if (Input.GetKeyDown(KeyCode.F) && isInspecting) //IF the player is interacting with an object

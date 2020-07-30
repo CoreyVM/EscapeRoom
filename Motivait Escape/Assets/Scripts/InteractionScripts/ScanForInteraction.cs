@@ -12,6 +12,7 @@ public class ScanForInteraction : MonoBehaviour
     private Text UIText;
     private bool TextSet;
     private Camera PlayerCamera;
+
     void Start()
     {
         player = transform.gameObject;
@@ -33,7 +34,7 @@ public class ScanForInteraction : MonoBehaviour
                     var ObjectScript = hit.transform.gameObject.GetComponent<InteractionObject>();
                     hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 1.1f);                 
                 }
-                else
+                else if(TextSet)
                 {
                     ////UIText.text = "";
                     //TextSet = false;
@@ -41,7 +42,6 @@ public class ScanForInteraction : MonoBehaviour
                     {
                         hitObject.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0);
                         hitObject = null;
-                        
                     }
                 }
              
