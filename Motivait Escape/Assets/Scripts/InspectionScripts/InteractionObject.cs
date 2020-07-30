@@ -18,6 +18,8 @@ public class InteractionObject : MonoBehaviour
     private Vector3 Scale, Rotation;
     public bool canRead;
 
+    private static CharacterMovement controller;
+
     public Vector3 GetScale() { return Scale; }
     public Vector3 GetRotation() { return Rotation; }
 
@@ -26,6 +28,7 @@ public class InteractionObject : MonoBehaviour
         Scale = transform.localScale;
         Rotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         renderer = this.transform.gameObject.GetComponent<Renderer>();
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
     }
 
    public void SetInteractionObject(GameObject player)
@@ -45,91 +48,32 @@ public class InteractionObject : MonoBehaviour
         this.SetObjectVisiblity(true);
     }
 
-    public void InteractWithItem(CharacterMovement controller)
+    public void InteractWithItem()
     {
         switch (ItemType)
         {
-            case ObjectType.None:
-                break;
             case ObjectType.Inspectable:
-                InspectObject(controller);
+                InspectObject();
                 break;
             case ObjectType.Interactable:
-                if (!controller.GetPickedUp())
-                {
-                    PickUpObject(controller);
-                    break;
-                }
-                else
-                {
-                    var rigid = controller.GetPickedUpObject().GetComponent<Rigidbody>();
-                    rigid.useGravity = true;
-                    rigid.isKinematic = false;
-                    rigid.AddForce(Camera.main.transform.forward * 500);
-                    rigid.transform.parent = null;
-                    controller.SetPickedUp(false);
-                    controller.SetPickedUpObject(null);
-                    break;
-                }  
+                InteractWithObject();
+                 break;    
             case ObjectType.Key:
                 controller.AddKey(ItemName);
                 Destroy(this.gameObject);
                 break;
             case ObjectType.PC:
+                var PCScript = GetComponent<PCScreen>();
+                PCScript.InteractiveScreen();
                 break;
             case ObjectType.Puzzle:
-                switch (PuzzleType)
-                {
-                    case "Internet Puzzle":
-                        var Board = GameObject.FindGameObjectWithTag("WireBoard");
-                        var BoardScript = Board.GetComponent<PuzzleBoard>();
-                        if (!controller.GetIsInspecting())
-                        {
-                            controller.SetIsInspecting(true);
-                            controller.SetCameraEnabled(false);
-                            BoardScript.SetCameraEnabled(true);
-                            BoardScript.SetPlayerScript(controller);
-                            break;
-                        }
-                        else
-                        {
-                            controller.SetIsInspecting(false);
-                            controller.SetCameraEnabled(true);
-                            BoardScript.SetCameraEnabled(false);
-                            BoardScript.SetPlayerScript(null);
-                        }
-                        
-                        break;
-                    case "Keypad Puzzle":
-                        var KeyPad = GameObject.FindGameObjectWithTag("Keypad");
-                        var KeyPadScript = KeyPad.GetComponent<KeypadBoard>();
-                        if (!controller.GetIsInspecting())
-                        {
-                            controller.SetIsInspecting(true);
-                            controller.SetCameraEnabled(false);
-                            KeyPadScript.SetCameraEnabled(true);
-                            KeyPadScript.SetPlayerScript(controller);
-                            KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = false;
-                            break;
-
-                        }
-                        else
-                        {
-                            controller.SetIsInspecting(false);
-                            controller.SetCameraEnabled(true);
-                            KeyPadScript.SetCameraEnabled(false);
-                            KeyPadScript.SetPlayerScript(null);
-                            KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = true;
-                            break;
-                        }
-                }
+                RunPuzzleScript();
                 break;
             case ObjectType.Door:
                 var DoorScript = this.transform.gameObject.GetComponent<DoorInteraction>();
-                if (!DoorScript.isLocked)
-                {
+                if (!DoorScript.isLocked) {
                     DoorScript.OpenDoor();
-                    break;
+                    break; 
                 }
                 else if (controller.GetKeysFound().Capacity > 0)
                     DoorScript.UnlockDoor(controller);
@@ -154,7 +98,7 @@ public class InteractionObject : MonoBehaviour
         renderer.enabled = value;
     }
 
-    private void InspectObject(CharacterMovement controller)
+    private void InspectObject()
     {
         if (!controller.GetIsInspecting())
         {
@@ -171,14 +115,7 @@ public class InteractionObject : MonoBehaviour
             controller.SetIsInspecting(false);
             this.RemoveInteractionObject(controller.InspectingObject);
             controller.InspectingObject.GetComponent<InspectorController>().ResetValues();
-        }
-        //else if(controller.GetIsInspecting())
-        //{
-        //    controller.SetIsInspecting(false);
-        //}
-        
-
-      
+        } 
     }
 
     public void PickUpObject(CharacterMovement controller)
@@ -194,4 +131,69 @@ public class InteractionObject : MonoBehaviour
             controller.SetPickedUpObject(null);
         }
     }
+
+    void InteractWithObject()
+    {
+        if (!controller.GetPickedUp())
+            PickUpObject(controller);
+        else
+        {
+            var rigid = controller.GetPickedUpObject().GetComponent<Rigidbody>();
+            rigid.useGravity = true;
+            rigid.isKinematic = false;
+            rigid.AddForce(Camera.main.transform.forward * 500);
+            rigid.transform.parent = null;
+            controller.SetPickedUp(false);
+            controller.SetPickedUpObject(null);
+        }
+    }
+
+    void RunPuzzleScript()
+    {
+        switch (PuzzleType)
+        {
+            case "Internet Puzzle":
+                var Board = GameObject.FindGameObjectWithTag("WireBoard");
+                var BoardScript = Board.GetComponent<PuzzleBoard>();
+                if (!controller.GetIsInspecting())
+                {
+                    controller.SetIsInspecting(true);
+                    controller.SetCameraEnabled(false);
+                    BoardScript.SetCameraEnabled(true);
+                    BoardScript.SetPlayerScript(controller);
+                    break;
+                }
+                else
+                {
+                    controller.SetIsInspecting(false);
+                    controller.SetCameraEnabled(true);
+                    BoardScript.SetCameraEnabled(false);
+                    BoardScript.SetPlayerScript(null);
+                }
+                break;
+            case "Keypad Puzzle":
+                var KeyPad = GameObject.FindGameObjectWithTag("Keypad");
+                var KeyPadScript = KeyPad.GetComponent<KeypadBoard>();
+                if (!controller.GetIsInspecting())
+                {
+                    controller.SetIsInspecting(true);
+                    controller.SetCameraEnabled(false);
+                    KeyPadScript.SetCameraEnabled(true);
+                    KeyPadScript.SetPlayerScript(controller);
+                    KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = false;
+                    break;
+
+                }
+                else
+                {
+                    controller.SetIsInspecting(false);
+                    controller.SetCameraEnabled(true);
+                    KeyPadScript.SetCameraEnabled(false);
+                    KeyPadScript.SetPlayerScript(null);
+                    KeyPad.transform.parent.gameObject.GetComponent<BoxCollider>().enabled = true;
+                    break;
+                }
+        }
+    }
+
 }

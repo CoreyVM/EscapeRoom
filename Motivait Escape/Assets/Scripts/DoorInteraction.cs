@@ -16,7 +16,7 @@ public class DoorInteraction : MonoBehaviour
 
     public GameObject DoorFront, DoorBack;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         canOpen = true;
@@ -82,10 +82,8 @@ public class DoorInteraction : MonoBehaviour
         float DoorDistance;
         DoorSideOpen = "Front";
         DoorDistance = Vector3.Distance(Player.transform.position, DoorFront.transform.position);
-        Debug.Log("The distance of the front is: " + DoorDistance);
 
         float BackDistance = Vector3.Distance(Player.transform.position, DoorBack.transform.position);
-        Debug.Log("The distance of the back is: " + BackDistance);
         if (DoorDistance > BackDistance)
             DoorSideOpen = "Back";
        
@@ -97,10 +95,7 @@ public class DoorInteraction : MonoBehaviour
     {
         if (controller.CheckForKey(KeyRequired)) //Checks the player list for the string name of the key required
         {
-            Debug.Log("The door is unlocked");
             isLocked = false;
         }
-        else
-            Debug.Log("The door is still locked find another key");
     }
 }

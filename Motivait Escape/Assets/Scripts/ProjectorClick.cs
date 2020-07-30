@@ -9,19 +9,19 @@ public class ProjectorClick : MonoBehaviour
     public List<Texture2D> Textures;
     private int CurrentTexIndex = 0;
 
-    private bool on = false;
+    private bool isOn = false;
 
     public void ToggleSlide()
     {
-        if (!on)
+        if (!isOn)
         {
-            on = true;
+            isOn = true;
             Slide.enabled = true;
             StartCoroutine(ChangeImage());
         }
         else
         {
-            on = false;
+            isOn = false;
             Slide.enabled = false;
             StopAllCoroutines();
         }

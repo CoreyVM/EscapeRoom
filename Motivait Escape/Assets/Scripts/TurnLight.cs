@@ -5,20 +5,11 @@ using UnityEngine;
 public class TurnLight : MonoBehaviour
 {
     public GameObject lightsource;
-    private bool on = false;
+    private bool isOn = false;
 
   public  void ToggleLight()
     {
-        if (!on)
-        {
-            on = true;
-            lightsource.SetActive(true);
-        }
-
-        else
-        {           
-                on = false;
-                lightsource.SetActive(false);        
-        }
+        isOn = !isOn;
+        lightsource.SetActive(isOn);
     }
 }

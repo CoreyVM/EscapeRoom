@@ -91,7 +91,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     hitObject = hit.transform.gameObject;
                     var script = hit.transform.gameObject.GetComponent<InteractionObject>();
-                    script.InteractWithItem(this);
+                    script.InteractWithItem();
                 }
             }
         }
@@ -102,7 +102,7 @@ public class CharacterMovement : MonoBehaviour
                 var script = hitObject.transform.gameObject.GetComponent<InteractionObject>();
                 if (script)
                 {
-                    script.InteractWithItem(this);
+                    script.InteractWithItem();
                 }
             }
 

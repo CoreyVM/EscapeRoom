@@ -7,24 +7,12 @@ public class PCScreen : MonoBehaviour
 {
     public GameObject ActiveCanvas;
     public CharacterMovement playerRef;
-    public bool IsInteracting = false;
+    private bool IsInteracting = false;
     public void InteractiveScreen()
     {
-        if (!IsInteracting)
-        {
-            IsInteracting = true;
-            ActiveCanvas.SetActive(true);
-            playerRef.SetIsInspecting(true);
-            Cursor.visible = true;
-            Debug.Log("Lock the player camrea");
-        }
-        else if(IsInteracting)
-        {
-            IsInteracting = false;
-            ActiveCanvas.SetActive(false);
-            playerRef.SetIsInspecting(false);
-            Cursor.visible = false;
-            Debug.Log("Unclock the camera");
-        }
+        IsInteracting = !IsInteracting;
+        ActiveCanvas.SetActive(IsInteracting);
+        playerRef.SetIsInspecting(IsInteracting);
+        Cursor.visible = IsInteracting;
     }
 }
