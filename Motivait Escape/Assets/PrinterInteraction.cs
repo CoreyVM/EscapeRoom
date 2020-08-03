@@ -5,6 +5,7 @@ using UnityEngine;
 public class PrinterInteraction : MonoBehaviour
 {
     public CharacterMovement PlayerRef;
+    public GameObject Paper;
     private bool isJammed;
     void Start()
     {
@@ -15,7 +16,8 @@ public class PrinterInteraction : MonoBehaviour
     {
         if (isJammed && PlayerRef.hasScrewdriver)
         {
-            Debug.Log("Fixed");
+            Paper.SetActive(true);
         }
+        
     }
 }

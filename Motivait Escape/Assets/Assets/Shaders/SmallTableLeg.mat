@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Columns
+  m_Name: SmallTableLeg
   m_Shader: {fileID: -6465566751694194690, guid: 899e40acc4aac2a459f3dbd2c2685122,
     type: 3}
   m_ShaderKeywords: 
@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1BE55FF6:
-        m_Texture: {fileID: 2800000, guid: 1f489b9a4e075e9419e3f40029d88c6a, type: 3}
+        m_Texture: {fileID: 2800000, guid: ef2effc16894d50428218538881e3d40, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -69,7 +69,7 @@ Material:
     - Vector1_2D53C5CC: 0.77
     - Vector1_31FBC52A: 0.7
     - Vector1_680CD20A: 1
-    - Vector1_8EB73F04: -0.31
+    - Vector1_8EB73F04: 0.46
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

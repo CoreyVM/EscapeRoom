@@ -10,5 +10,7 @@ public class ScrewdriverInteraction : MonoBehaviour
     {
         PlayerRef.hasScrewdriver = true;
         Destroy(this);
+        this.transform.gameObject.GetComponent<Renderer>().enabled = false;
+ 
     }
 }
