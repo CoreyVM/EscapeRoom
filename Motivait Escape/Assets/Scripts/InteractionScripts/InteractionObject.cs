@@ -8,7 +8,9 @@ public enum ObjectType {
     None, Puzzle, Door,
     Inspectable, Interactable, 
     Key, PC, Light, 
-    Screen, Slide, AI};
+    Screen, Slide, AI, 
+    DeskDrawer, CupboardDrawer
+};
 
 public class InteractionObject : MonoBehaviour
 {
@@ -95,6 +97,12 @@ public class InteractionObject : MonoBehaviour
             case ObjectType.AI:
                 var AIScript = controller.GetHitObject().GetComponent<AIInteraction>();
                 AIScript.SetHelpText();
+                break;
+            case ObjectType.DeskDrawer:
+                var Drawer = controller.GetHitObject().GetComponent<DeskDrawer>();
+                Drawer.InteractWithDrawer();
+                break;
+            case ObjectType.CupboardDrawer:
                 break;
         }
     }
