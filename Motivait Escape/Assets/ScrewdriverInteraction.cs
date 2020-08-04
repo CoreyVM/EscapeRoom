@@ -9,8 +9,9 @@ public class ScrewdriverInteraction : MonoBehaviour
     public void Interact()
     {
         PlayerRef.hasScrewdriver = true;
-        Destroy(this);
-        this.transform.gameObject.GetComponent<Renderer>().enabled = false;
+        this.transform.gameObject.SetActive(false);
+     //   Destroy(this);
+      //  this.transform.gameObject.GetComponent<Renderer>().enabled = false;
  
     }
 }

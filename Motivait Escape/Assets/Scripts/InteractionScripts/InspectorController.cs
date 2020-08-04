@@ -66,9 +66,16 @@ public class InspectorController : MonoBehaviour
     public void ResetValues()
     {
         this.transform.localRotation = UnityEngine.Quaternion.Euler(0, 0, 0);
+        this.transform.localScale = new UnityEngine.Vector3(1, 1, 1);
         parent.transform.localPosition = new UnityEngine.Vector3(0, 0, 1.26f);
         TextSet = false;
         UIText.text = "";
+    }
+
+    public void SetObjectScale(InteractionObject item)
+    {
+        UnityEngine.Vector3 scale = item.transform.localScale;
+        this.transform.localScale = scale;
     }
 
     private void SetUIText() 

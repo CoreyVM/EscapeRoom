@@ -8,8 +8,7 @@ public class PuzzleBoard : MonoBehaviour
     private List<GameObject> boardPieces = new List<GameObject>();
     private GameObject StartingBlock, EndingBlock;
     public Camera puzzleCam;
-
-
+    private bool hasWon = false;
     private CharacterMovement playerScript;
 
     int[] SolutionIndexes = { 0, 5, 10, 11, 12, 7, 2, 3, 8, 9, 14 };
@@ -17,6 +16,8 @@ public class PuzzleBoard : MonoBehaviour
     public void SetPlayerScript(CharacterMovement script) { playerScript = script; }
 
     int currentIndex = 0;
+
+    public bool GetHasWon() { return hasWon; }
 
     void Start()
     {
@@ -95,9 +96,9 @@ public class PuzzleBoard : MonoBehaviour
         }
 
         if (!hasBroken)
-        {
-            Debug.Log("You have won the puzzle!!!");
-        }
+            hasWon = true;
+        else
+            hasWon = false;
     }
 
 

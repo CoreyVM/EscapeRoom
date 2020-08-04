@@ -12,26 +12,23 @@ public class CharacterMovement : MonoBehaviour
     private Camera PlayerCamera;
     public Text UIText;
     public GameObject InspectingObject;
+    public Text combinationNum01, combinationNum02, combinationNum03, combinationNum04;
 
     public Canvas OptionScreen;
 
     private bool isInspecting, PickedUp; //Member Variables
+    public bool hasScrewdriver;
     private List<string> KeysFound = new List<string>();
 
     private GameObject pickedUpObject;
     public void SetPickedUpObject(GameObject value) { pickedUpObject = value; }
     public void SetPickedUp(bool value) { PickedUp = value; }
     public bool GetPickedUp() { return PickedUp; }
-
     public GameObject GetPickedUpObject() { return pickedUpObject; }
     public List<string> GetKeysFound() { return KeysFound; }
-    public GameObject GetHitObject()
-    {
-        return hitObject;
-    }
+    public GameObject GetHitObject() { return hitObject; }
     public void SetIsInspecting(bool value) { isInspecting = value; }
     public bool GetIsInspecting() { return isInspecting; }
-
     public void SetCameraEnabled(bool value) { PlayerCamera.enabled = value; }
 
     void Start()
@@ -40,6 +37,7 @@ public class CharacterMovement : MonoBehaviour
         PlayerCamera = GetComponentInChildren<Camera>();
         KeysFound.Clear();
         ShowOptionScreen(false);
+        hasScrewdriver = false;
     }
     void Update()
     {
@@ -78,7 +76,6 @@ public class CharacterMovement : MonoBehaviour
         Vector3 newPosition = rigid.position + rigid.transform.TransformDirection(movement) * Time.deltaTime;
         rigid.MovePosition(newPosition);
     }
-
 
     private void InteractWithObject()
     {
@@ -142,5 +139,24 @@ public class CharacterMovement : MonoBehaviour
     {
         OptionScreen.enabled = value;
         isInspecting = value;
+    }
+
+    public void SetCombinationNumberVisible(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                combinationNum01.enabled = true;
+                break;
+            case 2:
+                combinationNum02.enabled = true;
+                break;
+            case 3:
+                combinationNum03.enabled = true;
+                break;
+            case 4:
+                combinationNum04.enabled = true;
+                break;
+        }
     }
 }

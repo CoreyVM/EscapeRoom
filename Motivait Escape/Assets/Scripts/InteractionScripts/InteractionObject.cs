@@ -9,7 +9,7 @@ public enum ObjectType {
     Inspectable, Interactable, 
     Key, PC, Light, 
     Screen, Slide, AI, 
-    DeskDrawer, CupboardDrawer
+    DeskDrawer, ScrewDriver, Printer
 };
 
 public class InteractionObject : MonoBehaviour
@@ -102,7 +102,13 @@ public class InteractionObject : MonoBehaviour
                 var Drawer = controller.GetHitObject().GetComponent<DeskDrawer>();
                 Drawer.InteractWithDrawer();
                 break;
-            case ObjectType.CupboardDrawer:
+            case ObjectType.Printer:
+                var printer = controller.GetHitObject().GetComponent<PrinterInteraction>();
+                printer.Interact();
+                break;
+            case ObjectType.ScrewDriver:
+                var screwDriver = controller.GetHitObject().GetComponent<ScrewdriverInteraction>();
+                screwDriver.Interact();
                 break;
         }
     }
@@ -116,9 +122,10 @@ public class InteractionObject : MonoBehaviour
     {
         if (!controller.GetIsInspecting())
         {
-            controller.SetIsInspecting(true);
+            controller.SetIsInspecting(true);  
             controller.UIText.text = "";
             var inspector = controller.InspectingObject.GetComponent<InspectorController>();
+            inspector.SetObjectScale(this);
             inspector.SetCanRead(this.canRead);
             inspector.SetObjectScript(this);
             this.SetInteractionObject(controller.InspectingObject);

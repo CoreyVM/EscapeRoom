@@ -15,9 +15,6 @@ public class PrinterInteraction : MonoBehaviour
     public void Interact()
     {
         if (isJammed && PlayerRef.hasScrewdriver)
-        {
             Paper.SetActive(true);
-        }
-        
     }
 }
