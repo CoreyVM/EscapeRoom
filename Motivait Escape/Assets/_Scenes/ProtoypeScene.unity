@@ -14938,11 +14938,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: 
-  ItemDescription: 
+  ItemDescription: There seems to be a number on this piece of paper
   PuzzleType: 
   ItemType: 3
   ObjectMesh: {fileID: 0}
-  canRead: 0
+  canRead: 1
 --- !u!1 &1039768551
 GameObject:
   m_ObjectHideFlags: 0
@@ -31254,6 +31254,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322300692442029529, guid: e57b03b4c6aa09549a8af28127ab0307,
+        type: 3}
+      propertyPath: m_Name
+      value: DescriptionText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322300692442029531, guid: e57b03b4c6aa09549a8af28127ab0307,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e57b03b4c6aa09549a8af28127ab0307, type: 3}
