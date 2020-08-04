@@ -10,6 +10,28 @@ public class PCScreen : MonoBehaviour
     public PuzzleBoard wirePuzzleRef;
     private bool IsInteracting = false;
     private bool hasLoggedOn = false; //Use this for the tpying text funciton (log in to your pc)
+    public List<Texture2D> PCTextures;
+    public RawImage previewImage;
+
+
+    [SerializeField]
+    private string PCPassword;
+    [SerializeField]
+    private InputField inputField;
+
+    [SerializeField]
+    private GameObject LogInButton;
+    [SerializeField]
+    private GameObject NotepadIcon;
+    [SerializeField]
+    private Text infoText;
+
+
+    private void Start()
+    {
+        previewImage.texture = PCTextures[0];
+        NotepadIcon.SetActive(false);
+    }
 
     public void InteractiveScreen()
     {
@@ -17,11 +39,6 @@ public class PCScreen : MonoBehaviour
         ActiveCanvas.SetActive(IsInteracting);
         playerRef.SetIsInspecting(IsInteracting);
         Cursor.visible = IsInteracting;
-
-        if (!CheckForInternetAccess())
-        {
-            Debug.Log("there is no internet access cant log in"); //Place log in function here
-        }
     }
 
     bool CheckForInternetAccess()
@@ -29,5 +46,43 @@ public class PCScreen : MonoBehaviour
         if (!wirePuzzleRef.GetHasWon())
             return false;
         return true;
+    }
+
+   public void CheckPassword()
+    {
+        if (!CheckForInternetAccess())
+        {
+            SetInformationText("Can't connect to login services.", true);
+            return;
+        }
+        else
+            SetInformationText("", false);
+
+        if (inputField.text == PCPassword)
+            ShowDesktopScreen();
+        else
+            StartCoroutine(WrongPassword());
+    }
+
+    void ShowDesktopScreen()
+    {
+        previewImage.texture = PCTextures[1];
+        ActiveCanvas.GetComponentInChildren<RawImage>().texture = PCTextures[1];
+        inputField.transform.gameObject.SetActive(false);
+        LogInButton.SetActive(false);
+        NotepadIcon.SetActive(true);
+    }
+
+    IEnumerator WrongPassword()
+    {
+        SetInformationText("That password was wrong, try again.", true);
+        yield return new WaitForSeconds(5f);
+        SetInformationText("", false);
+    }
+
+    void SetInformationText(string text, bool visiblity)
+    {
+        infoText.text = text;
+        infoText.enabled = visiblity;
     }
 }
