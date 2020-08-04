@@ -42,15 +42,15 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         InteractWithObject();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))  // Application.OpenURL("about:blank"); use this to close game open motivait website instead
         {
-            if (OptionScreen.enabled)
-            {
-                ShowOptionScreen(false);
+            //if (OptionScreen.enabled)
+            //{
+            //    ShowOptionScreen(false);
 
-            }
-            else
-                ShowOptionScreen(true);
+            //}
+            //else
+            //    ShowOptionScreen(true);
         }
     }
 
