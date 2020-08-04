@@ -22,7 +22,8 @@ public class InteractionObject : MonoBehaviour
     private Vector3 Scale, Rotation;
     public bool canRead;
 
-    private static CharacterMovement controller;
+    [SerializeField]
+    private CharacterMovement controller;
 
     public Vector3 GetScale() { return Scale; }
     public Vector3 GetRotation() { return Rotation; }
@@ -32,7 +33,6 @@ public class InteractionObject : MonoBehaviour
         Scale = transform.localScale;
         Rotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         renderer = this.transform.gameObject.GetComponent<Renderer>();
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
     }
 
    public void SetInteractionObject(GameObject player)

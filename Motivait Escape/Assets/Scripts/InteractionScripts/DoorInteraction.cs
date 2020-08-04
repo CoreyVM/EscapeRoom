@@ -11,7 +11,8 @@ public class DoorInteraction : MonoBehaviour
     public string KeyRequired;
     private string DoorSideOpen;
 
-    private static GameObject Player;
+    [SerializeField]
+    private GameObject Player;
     private Animator animController;
 
     public GameObject DoorFront, DoorBack;
@@ -21,7 +22,6 @@ public class DoorInteraction : MonoBehaviour
     {
         canOpen = true;
         animController = GetComponent<Animator>();
-        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
 

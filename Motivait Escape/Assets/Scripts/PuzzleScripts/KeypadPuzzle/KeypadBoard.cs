@@ -5,9 +5,15 @@ using UnityEngine;
 public class KeypadBoard : MonoBehaviour
 {
     public KeypadKey[] Keypads;
+    [SerializeField]
     private int[] Solution = { 2, 4, 1, 3 }; //Use an array as we dont need to adjust in runtime
     private List<int> UserSolution = new List<int>(); //Use a list as we need to clear/add values in runtime
     private int KeysPressedIndex = 0;
+
+    [SerializeField]
+    private Timer timer;
+    [SerializeField]
+    private GameObject winScreen;
 
     private CharacterMovement playerScript;
     public Camera KeypadCamera;
@@ -65,7 +71,10 @@ public class KeypadBoard : MonoBehaviour
         if (!isCorrect)
             ResetKeypad();
         else
-            Debug.Log("You win");
+        {
+            timer.isActive = false;
+            winScreen.SetActive(true);
+        }
     }
 
     public void IncrementKeyPressed() 
