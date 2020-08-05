@@ -9,6 +9,8 @@ public class ProjectorClick : MonoBehaviour
     public List<Texture2D> Textures;
     private int CurrentTexIndex = 0;
 
+    [SerializeField]
+    private CharacterMovement playerRef;
     private bool isOn = false;
 
     public void ToggleSlide()
@@ -28,6 +30,8 @@ public class ProjectorClick : MonoBehaviour
     }
     IEnumerator ChangeImage()
     {
+        if (CurrentTexIndex == 1)
+            playerRef.SetCombinationNumberVisible(4);
         Slide.texture = Textures[CurrentTexIndex];
         yield return new WaitForSeconds(5f);
         CurrentTexIndex++;

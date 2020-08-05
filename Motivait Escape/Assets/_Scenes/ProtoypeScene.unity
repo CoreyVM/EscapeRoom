@@ -5673,7 +5673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 17f74f5cdff1e2f48bf65d3055b516b5, type: 3}
+  m_Texture: {fileID: 2800000, guid: 024002da0a8e97741af8e71a537f6282, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -7249,7 +7249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 1
 --- !u!222 &527102137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11812,7 +11812,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 4
 --- !u!222 &831507044
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12105,7 +12105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 17f74f5cdff1e2f48bf65d3055b516b5, type: 3}
+  m_Texture: {fileID: 2800000, guid: 024002da0a8e97741af8e71a537f6282, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -16235,7 +16235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 2
 --- !u!222 &1087304777
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27544,6 +27544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013659629e64ea64d8a4739b21a8aa67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRef: {fileID: 332588508}
   DesktopImage: {fileID: 433086095}
 --- !u!1001 &1808319680
 PrefabInstance:
@@ -31144,7 +31145,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 4
+  m_Text: 3
 --- !u!222 &2078388909
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32290,10 +32291,11 @@ MonoBehaviour:
   Slide: {fileID: 778630787}
   Textures:
   - {fileID: 2800000, guid: cc32ddd6736570244aad4b71d974e80c, type: 3}
-  - {fileID: 2800000, guid: 59fe52902a1438b4da1b97ca84294d5d, type: 3}
-  - {fileID: 2800000, guid: d7b91848b9d41c74b87f8665c714f281, type: 3}
   - {fileID: 2800000, guid: 0f1feb4bdd3cae7478eefbaa3cdab941, type: 3}
+  - {fileID: 2800000, guid: d7b91848b9d41c74b87f8665c714f281, type: 3}
+  - {fileID: 2800000, guid: d7b91848b9d41c74b87f8665c714f281, type: 3}
   - {fileID: 2800000, guid: edc6090b802c6c74a993e6d3eaeefce0, type: 3}
+  playerRef: {fileID: 332588508}
 --- !u!114 &1548340747130280910
 MonoBehaviour:
   m_ObjectHideFlags: 0

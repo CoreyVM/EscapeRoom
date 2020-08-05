@@ -5,11 +5,20 @@ using UnityEngine.UI;
 
 public class PCDesktopScript : MonoBehaviour
 {
+    [SerializeField]
+    private CharacterMovement playerRef;
+
     public RawImage DesktopImage;
     private bool isOpen;
+    private bool SetNumberTextVisible = false;
 
    public void ToggleImage()
     {
+        if (!SetNumberTextVisible)
+        {
+            SetNumberTextVisible = true;
+            playerRef.SetCombinationNumberVisible(1);
+        }
         isOpen = !isOpen;
         DesktopImage.enabled = isOpen;
     }
