@@ -9,6 +9,8 @@ public class PCDesktopScript : MonoBehaviour
     private CharacterMovement playerRef;
 
     public RawImage DesktopImage;
+    public RawImage WebsiteImage;
+
     private bool isOpen;
     private bool SetNumberTextVisible = false;
 
@@ -21,5 +23,10 @@ public class PCDesktopScript : MonoBehaviour
         }
         isOpen = !isOpen;
         DesktopImage.enabled = isOpen;
+    }
+    public void ToggleInternetImage()
+    { 
+        isOpen = !isOpen;
+        WebsiteImage.enabled = isOpen;
     }
 }

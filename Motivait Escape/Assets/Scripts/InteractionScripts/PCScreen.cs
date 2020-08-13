@@ -24,6 +24,8 @@ public class PCScreen : MonoBehaviour
     [SerializeField]
     private GameObject NotepadIcon;
     [SerializeField]
+    private GameObject InternetIcon;
+    [SerializeField]
     private Text infoText;
 
 
@@ -31,6 +33,7 @@ public class PCScreen : MonoBehaviour
     {
         previewImage.texture = PCTextures[0];
         NotepadIcon.SetActive(false);
+        InternetIcon.SetActive(false);
     }
 
     public void InteractiveScreen()
@@ -71,6 +74,7 @@ public class PCScreen : MonoBehaviour
         inputField.transform.gameObject.SetActive(false);
         LogInButton.SetActive(false);
         NotepadIcon.SetActive(true);
+        InternetIcon.SetActive(true);
     }
 
     IEnumerator WrongPassword()
