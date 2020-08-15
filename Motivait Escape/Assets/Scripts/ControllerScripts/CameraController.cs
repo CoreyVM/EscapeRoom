@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     private Vector2 smoothVelocity;
     private Vector2 currentRotation;
 
+    private PostProcessOutline outline;
+
     CharacterMovement controlScript;
 
     void Start()

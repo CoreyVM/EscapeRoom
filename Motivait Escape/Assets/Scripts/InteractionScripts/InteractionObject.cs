@@ -41,7 +41,8 @@ public class InteractionObject : MonoBehaviour
        var PlayerMeshRenderer = player.GetComponentInChildren<MeshRenderer>();
         
        PlayerMeshFilter.sharedMesh = this.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
-       PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
+        PlayerMeshRenderer.sharedMaterials = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterials;
+     //  PlayerMeshRenderer.sharedMaterial = this.transform.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
        player.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0.0f);
 
     }

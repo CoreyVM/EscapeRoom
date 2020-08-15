@@ -89,6 +89,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     hitObject = hit.transform.gameObject;
                     var script = hit.transform.gameObject.GetComponent<InteractionObject>();
+                    if(script != null)
                     script.InteractWithItem();
                 }
             }

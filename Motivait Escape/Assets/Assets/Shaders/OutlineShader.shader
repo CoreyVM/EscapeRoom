@@ -4,7 +4,7 @@
      _Color("Main Color", Color) = (0.5,0.5,0.5,1)
      _MainTex("Texture", 2D) = "White" {}
      _OutlineColor("Outline color", color) = (0,0,0,1)
-     _OutlineWidth("Outline width", Range(0,5.0)) = 1.01
+     _OutlineWidth("Outline width", Range(0.0,5.0)) = 1.01
     }
 
 
@@ -33,7 +33,8 @@
         float4 _OutlineColor;
 
         v2f vert(appdata v) {
-         v.vertex.xyz *= _OutlineWidth;
+            v.vertex.xyz *= _OutlineWidth;
+          //  v.vertex.xyz += v.normal.xyz * _OutlineWidth;
 
          v2f o;
          o.pos = UnityObjectToClipPos(v.vertex);
