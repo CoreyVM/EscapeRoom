@@ -36,7 +36,6 @@ public class CharacterMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         PlayerCamera = GetComponentInChildren<Camera>();
         KeysFound.Clear();
-        ShowOptionScreen(false);
         hasScrewdriver = false;
     }
     void Update()
@@ -134,12 +133,6 @@ public class CharacterMovement : MonoBehaviour
         pickedUpObject.transform.position = InspectingObject.transform.position;
         pickedUpObject.transform.rotation = InspectingObject.transform.rotation;
         pickedUpObject.transform.parent = InspectingObject.transform.parent;
-    }
-
-    void ShowOptionScreen(bool value)
-    {
-        OptionScreen.enabled = value;
-        isInspecting = value;
     }
 
     public void SetCombinationNumberVisible(int index)

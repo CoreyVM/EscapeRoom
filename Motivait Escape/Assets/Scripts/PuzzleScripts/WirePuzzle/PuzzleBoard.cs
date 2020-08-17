@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PuzzleBoard : MonoBehaviour
 {
-    private List<GameObject> boardPieces = new List<GameObject>();
+    [SerializeField] private List<GameObject> boardPieces = new List<GameObject>();
     private GameObject StartingBlock, EndingBlock;
     public Camera puzzleCam;
     private bool hasWon = false;
@@ -22,22 +22,11 @@ public class PuzzleBoard : MonoBehaviour
     void Start()
     {
         puzzleCam.enabled = false;
-        var pieces = GameObject.FindGameObjectsWithTag("WirePiece");
-        foreach (GameObject obj in pieces)
-        {
-            obj.SetActive(false);
-            boardPieces.Add(obj);
-        }
         StartingBlock = boardPieces[0];
         EndingBlock = boardPieces[boardPieces.Count - 1]; //Gets the first and last index of the board
-
-
         boardPieces[0].GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
 
 
-
-        //So we can track the wire connection
-        StartingBlock.GetComponent<WirePiece>().SetCanMove(false);
         EndingBlock.GetComponent<WirePiece>().SetCanMove(false);//Makes these block pre determined position 
                                                                 //so these blocks cant be moved by the player
 

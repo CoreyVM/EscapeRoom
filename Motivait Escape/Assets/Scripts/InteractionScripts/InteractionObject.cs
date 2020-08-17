@@ -131,6 +131,13 @@ public class InteractionObject : MonoBehaviour
             inspector.SetObjectScript(this);
             this.SetInteractionObject(controller.InspectingObject);
             SetObjectVisiblity(false);
+
+            var KeypadNumberInserter = this.transform.gameObject.GetComponent<InsertKeypadNumber>();
+            if (KeypadNumberInserter)
+            {
+                KeypadNumberInserter.RevealKeypadValue();
+            }
+
         }
         else
         {

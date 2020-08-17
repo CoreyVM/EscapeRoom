@@ -7,8 +7,8 @@ public class WirePiece : MonoBehaviour
 {
     public enum PieceType { Straight, Corner};
     public PieceType BlockType;
- 
-    bool isActive, canMove;
+
+    [SerializeField] bool isActive, canMove;
     public int BlockPosition;
 
     private static PuzzleBoard BoardScript;
@@ -22,7 +22,7 @@ public class WirePiece : MonoBehaviour
 
     void Start()
     {
-        canMove = true;
+      //  canMove = true;
         SetPiecePosition();
         CheckWinPosition();
         BoardScript = GetComponentInParent<PuzzleBoard>();
