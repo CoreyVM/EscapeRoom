@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
         player = transform.parent.gameObject;
         controlScript = transform.parent.gameObject.GetComponent<CharacterMovement>();
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        Cursor.visible = true;
     } 
     void Update()
     {

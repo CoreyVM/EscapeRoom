@@ -9,7 +9,7 @@ public class PCScreen : MonoBehaviour
     public CharacterMovement playerRef;
     public PuzzleBoard wirePuzzleRef;
     private bool IsInteracting = false;
-    private bool hasLoggedOn = false; //Use this for the tpying text funciton (log in to your pc)
+    private bool hasLoggedOn = false; //Use this for the typing text funciton (log in to your pc)
     public List<Texture2D> PCTextures;
     public RawImage previewImage;
 
